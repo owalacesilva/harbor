@@ -1,0 +1,56 @@
+
+version: '3.7'
+
+services:
+  app: &app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        RUBY_VERSION: '3.0'
+        NODE_VERSION: 'lts/*'
+        PG_MAJOR: '12'
+        BUNDLER_VERSION: '2.3.7'
+    image: harbor:1.0.0
+    tmpfs:
+      - /tmp
+
+  backend: &backend
+    <<: *app
+    stdin_open: true
+    tty: true
+    volumes:
+      - bundle:/usr/local/bundle
+      - ..:/workspace:cached
+      - ~/.ssh:/home/vscode/.ssh
+    environment:
+      - RAILS_ENV=development
+      - RAILS_MAX_THREADS=5
+      - DATABASE_URL=postgres://postgres:123456@postgresdb:5432
+      - WEB_CONCURRENCY=1
+      - HISTFILE=./log/.bash_history
+      - EDITOR=vi
+    depends_on:
+      - postgresdb
+      - mailcatcher
+
+  runner:
+    <<: *backend
+    command: /bin/bash
+    ports:
+      - 3000:3000
+
+  postgresdb:
+    image: postgres:12.5-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 123456
+
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - 1025:1025
+      - 1080:1080
+
+volumes:
+  bundle:

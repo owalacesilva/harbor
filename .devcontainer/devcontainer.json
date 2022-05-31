@@ -1,0 +1,75 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/ruby-rails-postgres
+// Update the VARIANT arg in docker-compose.yml to pick a Ruby version
+{
+	"name": "Harbor",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "runner",
+	"workspaceFolder": "/workspace",
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+    "ruby.useBundler": true, //run non-lint commands with bundle exec
+    "ruby.useLanguageServer": true, // use the internal language server (see below)
+    "ruby.lint": {
+      "rubocop": {
+        "useBundler": true
+      },
+      "reek": {
+        "useBundler": true
+      }
+    },
+    "ruby.format": "rubocop", // use rubocop for formatting
+    
+    // If not specified, it assumes a null value by default.
+    "ruby.rubocop.suppressRubocopWarnings": true,
+    "ruby.rubocop.configFilePath": ".rubocop.yml",
+    "ruby.rubocop.onSave": true,
+    "ruby.rubocop.useBundler": false,
+
+    "editor.tabSize": 2,
+    
+    "[javascript]": {
+      "editor.tabSize": 2
+    },
+    
+    "[ruby]": {
+      "editor.tabSize": 2
+    },
+    
+    "[json]": {
+      "editor.tabSize": 2
+    },
+
+    // This one forces the tab to be **space**
+    "editor.insertSpaces": true,  
+
+    // When opening a file, `editor.tabSize` and `editor.insertSpaces`
+    // will be detected based on the file contents. Set to false to keep
+    // the values you've explicitly set, above.
+    "editor.detectIndentation": false,
+    "solargraph.useBundler": true,
+    "solargraph.diagnostics": true,
+    "solargraph.formatting": true
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"rebornix.Ruby",
+    "castwide.solargraph",
+    "eamodio.gitlens",
+    "donjayamanne.githistory",
+    "misogi.ruby-rubocop",
+    "ms-azuretools.vscode-docker", 
+    "wingrunr21.vscode-ruby"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [3000],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "bundle install && rake db:setup",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}
