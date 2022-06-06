@@ -1,7 +1,8 @@
 # The Profile class is responsible for ...
 
 class Profile < ApplicationRecord
-  has_one :account, class_name: "Account", dependent: :destroy
+  has_one :account, dependent: :destroy
+  has_one :user, dependent: :destroy
 
   enum :gender, {
     undefined: "undefined",

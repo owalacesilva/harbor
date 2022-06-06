@@ -166,9 +166,11 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.bigint "reference_id", null: false
     t.decimal "balance", precision: 10, scale: 2, default: "0.0"
     t.decimal "incomes", precision: 10, scale: 2, default: "0.0"
     t.decimal "expenses", precision: 10, scale: 2, default: "0.0"
+    t.index ["reference_id"], name: "index_wallets_on_reference_id"
     t.index ["user_id"], name: "index_wallets_on_user_id"
   end
 
@@ -181,7 +183,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
     t.date "blocked_at"
     t.boolean "approved", default: false, null: false
     t.date "approved_at"
-    t.decimal "balance", precision: 10, scale: 2
+    t.decimal "balance", precision: 10, scale: 2, default: "0.0"
     t.index ["user_id"], name: "index_withdraws_on_user_id"
     t.index ["wallet_id"], name: "index_withdraws_on_wallet_id"
   end
@@ -196,6 +198,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
   add_foreign_key "transactions", "wallets", column: "target_wallet_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "withdraws", on_update: :cascade, on_delete: :cascade
   add_foreign_key "users", "profiles", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "wallets", "\"references\"", column: "reference_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "wallets", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "withdraws", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "withdraws", "wallets", on_update: :cascade, on_delete: :cascade

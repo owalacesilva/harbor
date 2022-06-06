@@ -12,7 +12,10 @@ RSpec.describe Wallet, type: :model do
   describe ".associations" do
     subject { build(:wallet) }
 
-    it { is_expected.to belong_to(:user).class_name("User") }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:reference) }
+    it { is_expected.to have_many(:origin_transactions).inverse_of(:origin_wallet).class_name("Transaction") }
+    it { is_expected.to have_many(:target_transactions).inverse_of(:target_wallet).class_name("Transaction") }
   end
 
   describe ".validations" do

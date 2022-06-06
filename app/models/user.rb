@@ -7,6 +7,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :profile, optional: false
+  has_many :addresses, dependent: :destroy
+  has_many :banking_accounts, dependent: :destroy
+  has_many :wallets, dependent: :destroy
+  has_many :withdraws, dependent: :destroy
 
   validates :email, presence: true
   validates :password, presence: true

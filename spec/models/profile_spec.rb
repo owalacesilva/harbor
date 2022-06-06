@@ -12,7 +12,8 @@ RSpec.describe Profile, type: :model do
   describe "associations" do
     subject { build(:profile) }
 
-    it { is_expected.to have_one(:account).class_name("Account") }
+    it { is_expected.to have_one(:account).dependent(:destroy) }
+    it { is_expected.to have_one(:user).dependent(:destroy) }
   end
 
   describe "validations" do

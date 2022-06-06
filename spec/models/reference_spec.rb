@@ -9,7 +9,12 @@ RSpec.describe Reference, type: :model do
     end
   end
 
-  pending ".associations"
+  describe ".associations" do
+    subject { build(:reference) }
+
+    it { is_expected.to have_many(:wallets).dependent(:destroy) }
+    it { is_expected.to have_many(:transactions).dependent(:destroy) }
+  end
 
   describe ".validations" do
     subject { build(:reference) }

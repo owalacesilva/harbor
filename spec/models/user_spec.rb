@@ -12,7 +12,11 @@ RSpec.describe User, type: :model do
   describe "associations" do
     subject { build(:user) }
 
-    it { is_expected.to belong_to(:profile).class_name("Profile") }
+    it { is_expected.to belong_to(:profile) }
+    it { is_expected.to have_many(:addresses).dependent(:destroy) }
+    it { is_expected.to have_many(:banking_accounts).dependent(:destroy) }
+    it { is_expected.to have_many(:wallets).dependent(:destroy) }
+    it { is_expected.to have_many(:withdraws).dependent(:destroy) }
   end
 
   describe "validations" do

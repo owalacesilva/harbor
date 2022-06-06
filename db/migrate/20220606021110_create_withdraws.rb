@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateWithdrawns < ActiveRecord::Migration[7.1]
+class CreateWithdraws < ActiveRecord::Migration[7.1]
   def up
     create_table :withdraws do |t|
       # Timestamps
