@@ -30,6 +30,9 @@ gem "cssbundling-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Devise authenticate
+gem "devise"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -54,6 +57,46 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "pry-byebug"
+  # Permite que o RSpec abra o navegador
+  gem "launchy"
+  # Roda os testes automaticamente
+  gem "guard-rspec"
+  gem "reek"
+  gem "rspec-activemodel-mocks"
+  gem "rspec-collection_matchers"
+  gem "rspec-its"
+  gem "rspec-rails"
+  gem "rspec-retry"
+  gem "shoulda-matchers"
+  gem "rubocop"
+  gem "rubocop-performance"
+  gem "rubocop-rails"
+  gem "rubocop-rspec"
+  gem "solargraph"
+
+  gem "factory_bot_rails", git: "https://github.com/thoughtbot/factory_bot_rails", branch: "master"
+  gem "faker",             git: "https://github.com/stympy/faker",                 branch: "master"
+end
+
+group :test do
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '>= 3.26'
+  gem 'selenium-webdriver'
+  # Easy installation and use of web drivers to run system tests with browsers
+  gem "mock_redis"
+  gem "selenium-webdriver"
+  gem "shoulda-matchers", require: false
+  gem "simplecov", require: false
+  gem "simplecov-json", require: false
+  gem "vcr", require: false
+  gem "webdrivers", require: false
+  gem "webmock"
+  
+  gem "database_cleaner-active_record"
+  gem "rails-controller-testing"
 end
 
 group :development do
@@ -65,5 +108,12 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+end
+
+group :assets, :production, :staging do
+  gem 'therubyracer'
+  # Use SCSS for stylesheets
+  gem 'sass-rails', '>= 6'
+  gem 'uglifier'
 end
 
