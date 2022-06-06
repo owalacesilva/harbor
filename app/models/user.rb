@@ -1,12 +1,13 @@
 # The User class is responsible for ...
 
 class User < ApplicationRecord
+  include Profilable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :profile, optional: false
   has_many :addresses, dependent: :destroy
   has_many :banking_accounts, dependent: :destroy
   has_many :wallets, dependent: :destroy
