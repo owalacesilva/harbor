@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_06_06_014653) do
+ActiveRecord::Schema[7.1].define(version: 2022_06_06_015824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,6 +96,14 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_014653) do
     t.string "gender", limit: 9, default: "undefined", null: false
     t.date "birth_date"
     t.string "phone_number", limit: 45
+  end
+
+  create_table "references", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "unique_name", limit: 45, null: false
+    t.string "display_name", limit: 45
+    t.string "description", limit: 255
   end
 
   create_table "roles", force: :cascade do |t|
