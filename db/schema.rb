@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_06_06_020440) do
+ActiveRecord::Schema[7.1].define(version: 2022_06_06_021110) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -152,10 +152,26 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_020440) do
     t.index ["user_id"], name: "index_wallets_on_user_id"
   end
 
+  create_table "withdraws", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "wallet_id", null: false
+    t.boolean "blocked", default: false, null: false
+    t.date "blocked_at"
+    t.boolean "approved", default: false, null: false
+    t.date "approved_at"
+    t.decimal "balance", precision: 10, scale: 2
+    t.index ["user_id"], name: "index_withdraws_on_user_id"
+    t.index ["wallet_id"], name: "index_withdraws_on_wallet_id"
+  end
+
   add_foreign_key "accounts", "profiles", on_update: :cascade, on_delete: :cascade
   add_foreign_key "accounts", "roles", on_update: :cascade, on_delete: :cascade
   add_foreign_key "addresses", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "banking_accounts", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "users", "profiles", on_update: :cascade, on_delete: :cascade
   add_foreign_key "wallets", "users", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "withdraws", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "withdraws", "wallets", on_update: :cascade, on_delete: :cascade
 end
