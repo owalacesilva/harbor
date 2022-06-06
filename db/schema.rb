@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_06_06_012827) do
+ActiveRecord::Schema[7.1].define(version: 2022_06_06_014653) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,23 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_012827) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "banking_accounts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.string "bank_code"
+    t.string "bank_name"
+    t.string "account_type"
+    t.string "branch_number"
+    t.string "branch_code"
+    t.string "account_number"
+    t.string "account_code"
+    t.string "holder_name"
+    t.string "document_number"
+    t.string "operation"
+    t.index ["user_id"], name: "index_banking_accounts_on_user_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -120,5 +137,6 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_012827) do
   add_foreign_key "accounts", "profiles", on_update: :cascade, on_delete: :cascade
   add_foreign_key "accounts", "roles", on_update: :cascade, on_delete: :cascade
   add_foreign_key "addresses", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "banking_accounts", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "users", "profiles", on_update: :cascade, on_delete: :cascade
 end
