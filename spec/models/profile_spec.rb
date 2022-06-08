@@ -9,16 +9,16 @@ RSpec.describe Profile, type: :model do
     end
   end
 
-  describe "associations" do
+  describe ".associations" do
     subject { build(:profile) }
 
-    it { is_expected.to have_one(:account).dependent(:destroy) }
-    it { is_expected.to have_one(:user).dependent(:destroy) }
+    it { is_expected.to belong_to(:user) }
   end
 
-  describe "validations" do
+  describe ".validations" do
     subject { build(:profile) }
 
+    it { is_expected.to belong_to(:user).optional(false) }
     it { is_expected.to validate_presence_of(:first_name) }
     it { is_expected.to validate_presence_of(:gender) }
     # it { is_expected.to validate_inclusion_of(:gender).in_array(["undefined", "male", "female"]) }

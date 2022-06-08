@@ -18,7 +18,6 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "role_id"
-    t.bigint "profile_id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -38,7 +37,6 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
     t.datetime "locked_at"
     t.index ["confirmation_token"], name: "index_accounts_on_confirmation_token", unique: true
     t.index ["email"], name: "index_accounts_on_email", unique: true
-    t.index ["profile_id"], name: "index_accounts_on_profile_id"
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
     t.index ["role_id"], name: "index_accounts_on_role_id"
     t.index ["unlock_token"], name: "index_accounts_on_unlock_token", unique: true
@@ -47,7 +45,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
   create_table "addresses", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.string "first_name"
     t.string "last_name"
     t.string "phone_number"
@@ -91,11 +89,13 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
   create_table "profiles", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.string "first_name", limit: 45, null: false
     t.string "last_name", limit: 45
     t.string "gender", limit: 9, default: "undefined", null: false
     t.date "birth_date"
     t.string "phone_number", limit: 45
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "references", force: :cascade do |t|
@@ -137,7 +137,6 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "profile_id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -157,7 +156,6 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
     t.datetime "locked_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
@@ -188,16 +186,15 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
     t.index ["wallet_id"], name: "index_withdraws_on_wallet_id"
   end
 
-  add_foreign_key "accounts", "profiles", on_update: :cascade, on_delete: :cascade
   add_foreign_key "accounts", "roles", on_update: :cascade, on_delete: :cascade
   add_foreign_key "addresses", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "banking_accounts", "users", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "profiles", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "transactions", "\"references\"", column: "reference_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "wallets", column: "origin_wallet_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "wallets", column: "target_wallet_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "withdraws", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users", "profiles", on_update: :cascade, on_delete: :cascade
   add_foreign_key "wallets", "\"references\"", column: "reference_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "wallets", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "withdraws", "users", on_update: :cascade, on_delete: :cascade

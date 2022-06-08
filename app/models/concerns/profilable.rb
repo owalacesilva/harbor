@@ -4,7 +4,7 @@ module Profilable
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :profile, optional: false
+    has_one :profile, dependent: :destroy
   end
 
   def full_name

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :banking_account do
-    association :user
+    user { association :user }
 
     bank_code { Faker::Number.number(digits: 3) }
     bank_name { Faker::Bank.name }

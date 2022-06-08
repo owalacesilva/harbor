@@ -13,7 +13,6 @@ RSpec.describe Account, type: :model do
     subject { build(:account) }
 
     it { is_expected.to belong_to(:role).class_name("Role") }
-    it { is_expected.to belong_to(:profile).class_name("Profile") }
   end
 
   describe ".validations" do
@@ -21,17 +20,5 @@ RSpec.describe Account, type: :model do
 
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_presence_of(:password) }
-  end
-
-  describe ".profilable" do
-    subject(:account) { create(:account, profile: profile) }
-
-    let(:profile) { create(:profile) }
-
-    context "when call .full_name method" do
-      it "returns correct value" do
-        expect(account.full_name).to eq("#{profile.first_name}\s#{profile.last_name}")
-      end
-    end
   end
 end

@@ -3,6 +3,9 @@ class CreateProfiles < ActiveRecord::Migration[7.1]
     create_table :profiles do |t|
       t.timestamps null: false
 
+      # References
+      t.references :user, null: false, foreign_key: { on_delete: :cascade, on_update: :cascade }
+
       t.string :first_name, null: false, limit: 45
       t.string :last_name, limit: 45
       t.string :gender, null: false, limit: 9, default: "undefined"

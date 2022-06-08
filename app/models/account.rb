@@ -1,8 +1,6 @@
 # The Account class is responsible for ...
 
 class Account < ApplicationRecord
-  include Profilable
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

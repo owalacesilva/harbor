@@ -7,7 +7,6 @@ class DeviseCreateAccounts < ActiveRecord::Migration[7.1]
 
       # References
       t.references :role, foreign_key: { on_delete: :cascade, on_update: :cascade }
-      t.references :profile, foreign_key: { on_delete: :cascade, on_update: :cascade }
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""

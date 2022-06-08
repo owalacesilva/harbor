@@ -7,7 +7,7 @@ class CreateAddresses < ActiveRecord::Migration[7.1]
       t.timestamps null: false, precision: 6
 
       # References
-      t.references :user, foreign_key: { on_delete: :cascade, on_update: :cascade }
+      t.references :user, null: false, foreign_key: { on_delete: :cascade, on_update: :cascade }
 
       # Address' details
       t.string :first_name
