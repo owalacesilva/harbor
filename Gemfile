@@ -94,7 +94,6 @@ group :test do
   gem "vcr", require: false
   gem "webdrivers", require: false
   gem "webmock"
-  
   gem "database_cleaner-active_record"
   gem "rails-controller-testing"
 end
