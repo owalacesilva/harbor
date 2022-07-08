@@ -1,8 +1,23 @@
 Rails.application.routes.draw do
-  devise_for :users
-  devise_for :accounts
+  devise_for :users, path: "backoffice", controllers: {
+    sessions: "users/sessions",
+    registrations: "users/registrations",
+  }
+
+  devise_for :accounts, path: "admin", controllers: {
+    sessions: "accounts/sessions",
+    registrations: "accounts/registrations",
+  }
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  namespace :admin do
+    get "", controller: :overview, action: :index, as: :overview
+
+    resources :users do
+      post "delete", action: :destroy, on: :member
+    end
+  end
 
   # Defines the root path route ("/")
-  # root "articles#index"
+  root "index#index"
 end
