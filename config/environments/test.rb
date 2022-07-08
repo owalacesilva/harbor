@@ -7,6 +7,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  Rails.application.routes.default_url_options = { protocol: "http", host: "localhost" }
 
   # Turn true under Spring and add config.action_view.cache_template_loading = true.
   config.enable_reloading = false
