@@ -10,4 +10,10 @@ class Account < ApplicationRecord
 
   validates :email, presence: true
   validates :password, presence: true
+
+  before_validation :default_role, on: [:create]
+
+  def default_role
+    self.role = Role.employee if role.nil?
+  end
 end
