@@ -5,6 +5,8 @@ module Profilable
 
   included do
     has_one :profile, dependent: :destroy
+
+    accepts_nested_attributes_for :profile
   end
 
   def full_name
