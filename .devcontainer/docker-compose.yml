@@ -45,6 +45,8 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: 123456
+    ports:
+      - 5432:5432
 
   mailcatcher:
     image: schickling/mailcatcher
