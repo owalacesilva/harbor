@@ -47,6 +47,7 @@ Metrics/BlockLength:
   Max: 5
   Exclude:
     - 'config/routes.rb'
+    - 'config/initializers/**/*'
     - 'db/**/*'
   IgnoredMethods:
     - context
