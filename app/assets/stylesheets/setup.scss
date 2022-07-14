@@ -1,0 +1,39 @@
+// Required
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "variables";
+
+// Default variable overrides
+$body-bg: #e7e7e7;
+$enable-rounded: true;
+$font-family-base: Arial, Helvetica, sans-serif;
+/* $font-size-base: 14px; */
+$input-font-size: 14px;
+// $input-line-height: 1;
+// $btn-line-height: 1;
+$btn-font-weight: bold;
+$form-label-font-weight: bold;
+$link-color: $secondary-color;
+$theme-colors: (
+  "primary":    $primary-color,
+  "secondary":  $secondary-color,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
+// xxl is old: 1320px
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1140px
+);
+
+// Optional components here
+@import "bootstrap";
+@import "font-awesome";

@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light py-4">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <%= image_tag 'logo_default.png', alt: "Logo Company", height: '24', class: 'd-inline-block align-text-top' %>
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ms-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="me-1"><%= current_user.full_name %></span>
+            <%= image_tag 'avatar.jpg', alt: "Avatar profile", class: "img-fluid", style: "max-height: 30px" %>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Minha conta</a></li>
+            <li><%= link_to "Sair", destroy_session_path(:user), method: :delete, class: "dropdown-item" %></li>
+          </ul>
+        </li>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container py-3 mb-3">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Buy Tokens</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Token Distribution</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Transactions</a>
+    </li>
+  </ul>
+</div>
