@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :backoffice do
+    get "", controller: :overview, action: :index, as: :overview
+  end
+
   # Defines the root path route ("/")
   root "index#index"
 end
