@@ -14,5 +14,4 @@ class User < ApplicationRecord
   has_many :withdraws, dependent: :destroy
 
   validates :email, presence: true
-  validates :password, presence: true
 end
