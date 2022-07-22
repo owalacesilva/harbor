@@ -1,0 +1,2 @@
+module Backoffice::ProfileHelper
+end

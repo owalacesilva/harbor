@@ -19,7 +19,10 @@ Rails.application.routes.draw do
   end
 
   namespace :backoffice do
-    get "", controller: :overview, action: :index, as: :overview
+    get '', controller: :overview, action: :index, as: :overview
+
+    get 'profile', controller: :profile, action: :index, as: :profile
+    post 'profile', controller: :profile, action: :update, as: :update_profile
   end
 
   # Defines the root path route ("/")

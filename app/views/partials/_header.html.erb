@@ -11,7 +11,7 @@
             <%= image_tag 'avatar.jpg', alt: "Avatar profile", class: "img-fluid", style: "max-height: 30px" %>
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Minha conta</a></li>
+            <li><%= link_to "Minha Conta", backoffice_profile_path, class: "dropdown-item" %></li>
             <li><%= link_to "Sair", destroy_session_path(:user), method: :delete, class: "dropdown-item" %></li>
           </ul>
         </li>
@@ -22,7 +22,7 @@
 <div class="container py-3 mb-3">
   <ul class="nav nav-pills">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+      <%= link_to "Dashboard", backoffice_overview_path, class: "nav-link active" %>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Buy Tokens</a>
