@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, path: "backoffice", controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
+    passwords: "users/passwords"
   }
 
   devise_for :accounts, path: "admin", controllers: {
