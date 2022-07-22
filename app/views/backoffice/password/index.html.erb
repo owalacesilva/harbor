@@ -1,0 +1,30 @@
+<div class="container py-3 mb-3">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Senha de Acesso</h5>
+      <%= form_for @user, as: :user, url: backoffice_update_account_password_path, method: :post, html: { class: "row g-3" } do |f| %>
+        <% flash.each do |type, msg| %>
+          <div class="alert alert-info">
+            <%= msg %>
+          </div>
+        <% end %>
+        <div class="col-md-6">
+          <%= f.label :current_password, class: "form-label" %><br />
+          <%= f.password_field :current_password, class: "form-control", required: true %>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+          <%= f.label :password, class: "form-label" %><br />
+          <%= f.password_field :password, class: "form-control", required: true %>
+        </div>
+        <div class="col-md-6">
+          <%= f.label :password_confirmation, class: "form-label" %><br />
+          <%= f.password_field :password_confirmation, class: "form-control", required: true %>
+        </div>
+        <div class="col-12">
+          <%= f.submit "Atualizar", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

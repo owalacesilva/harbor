@@ -12,6 +12,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
             <li><%= link_to "Minha Conta", backoffice_profile_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Senha de Acesso", backoffice_account_password_path, class: "dropdown-item" %></li>
             <li><%= link_to "Sair", destroy_session_path(:user), method: :delete, class: "dropdown-item" %></li>
           </ul>
         </li>

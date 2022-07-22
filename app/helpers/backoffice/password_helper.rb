@@ -1,0 +1,2 @@
+module Backoffice::PasswordHelper
+end

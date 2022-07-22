@@ -24,6 +24,9 @@ Rails.application.routes.draw do
 
     get 'profile', controller: :profile, action: :index, as: :profile
     post 'profile', controller: :profile, action: :update, as: :update_profile
+
+    get 'account/password', controller: :password, action: :index, as: :account_password
+    post 'account/password', controller: :password, action: :update, as: :update_account_password
   end
 
   # Defines the root path route ("/")
