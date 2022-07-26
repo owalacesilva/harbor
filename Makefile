@@ -11,3 +11,6 @@ up:
 
 dbsetup:
 	rake db:setup && rake db:migrate && rake db:seed
+
+guard:
+	bundle exec guard
