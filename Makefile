@@ -14,3 +14,9 @@ dbsetup:
 
 guard:
 	bundle exec guard
+
+console:
+	bundle exec rails console --no-sandbox
+
+sandbox:
+	bundle exec rails console --sandbox
