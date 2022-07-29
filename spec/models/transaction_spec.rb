@@ -28,7 +28,7 @@ RSpec.describe Transaction, type: :model do
     it { is_expected.to belong_to(:target_wallet).optional(false) }
     it { is_expected.to belong_to(:reference).optional(false) }
     it { is_expected.to belong_to(:withdraw).optional }
-    it { is_expected.to validate_presence_of(:code) }
+    # it { is_expected.to validate_presence_of(:code) }
     # it { is_expected.to validate_uniqueness_of(:code) }
   end
 end

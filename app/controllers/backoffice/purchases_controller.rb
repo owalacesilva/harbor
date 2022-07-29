@@ -12,12 +12,12 @@ class Backoffice::PurchasesController < ApplicationController
   end
 
   def create
-    @purchase = current_user.purchases.build(purchase_params)
-    if @purchase.save
-      redirect_to backoffice_purchases_path, notice: 'Compra criada'
-    else
-      flash.now[:alert] = @purchase.errors.full_messages
+    organizer = BuyTokenOrganizer.call(user_id: current_user.id, amount: purchase_params[:amount])
+    if organizer.failure?
+      flash.now[:alert] = organizer.message
       render :new
+    else
+      redirect_to backoffice_purchases_path, notice: 'Compra criada'
     end
   end
 
