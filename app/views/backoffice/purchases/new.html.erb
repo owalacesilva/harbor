@@ -1,0 +1,31 @@
+<div class="container py-3 mb-3">
+  <div class="row g-3">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Compra de Tokens</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <%= form_for @purchase, as: :purchase, url: backoffice_purchases_path, method: :post do |f| %>
+                <% flash.each do |type, msg| %>
+                  <div class="alert alert-info">
+                    <%= msg %>
+                  </div>
+                <% end %>
+                <div class="mb-3">
+                  <%= f.label :amount, class: "form-label" %><br />
+                  <%= f.text_field :amount, class: "form-control", required: true %>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <%= f.submit "Comprar", class: "btn btn-success" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+</div>
