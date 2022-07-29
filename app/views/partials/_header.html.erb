@@ -26,13 +26,13 @@
       <%= link_to "Dashboard", backoffice_overview_path, class: "nav-link active" %>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Buy Tokens</a>
+      <%= link_to "Comprar Tokens", new_backoffice_purchase_path, class: "nav-link" %>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Token Distribution</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Transactions</a>
+      <%= link_to "Movimentações", backoffice_transactions_path, class: "nav-link" %>
     </li>
   </ul>
 </div>

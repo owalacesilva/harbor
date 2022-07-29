@@ -1,0 +1,42 @@
+<div class="container py-3 mb-3">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Movimentações financeira</h5>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">COD</th>
+            <th scope="col">Data</th>
+            <th scope="col">Tokens</th>
+            <th scope="col">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @transactions.empty? -%>
+            <tr>
+              <td colspan="5">
+                <div class="d-flex justify-content-center">
+                  <span>Nenhuma movimentação encontrada</span>
+                </div>
+              </td>
+            </tr>
+          <% else -%>
+            <% @transactions.each do |item| -%>
+              <tr>
+                <td scope="row"><%= item.code %></td>
+                <td><%= item.created_at %></td>
+                <td><%= item.point_amount %></td>
+                <td><%= item.amount %></td>
+                <td>
+                  <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary btn-sm">Detalhes</button>
+                  </div>
+                </td>
+              </tr>
+            <%- end -%>
+          <% end -%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

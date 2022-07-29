@@ -27,6 +27,9 @@ Rails.application.routes.draw do
 
     get 'account/password', controller: :password, action: :index, as: :account_password
     post 'account/password', controller: :password, action: :update, as: :update_account_password
+
+    resources :purchases
+    resources :transactions, only: [:index, :show]
   end
 
   # Defines the root path route ("/")
