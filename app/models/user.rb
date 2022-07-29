@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :banking_accounts, dependent: :destroy
   has_many :wallets, dependent: :destroy
   has_many :withdraws, dependent: :destroy
+  has_many :purchases, dependent: :destroy
 
   validates :email, presence: true
 end

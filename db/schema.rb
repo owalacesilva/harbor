@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_07_24_005459) do
+ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -133,11 +133,13 @@ ActiveRecord::Schema[7.1].define(version: 2022_07_24_005459) do
     t.bigint "target_wallet_id", null: false
     t.bigint "reference_id", null: false
     t.bigint "withdraw_id"
+    t.bigint "purchase_id"
     t.string "operation", null: false
     t.decimal "amount", precision: 10, scale: 2, null: false
     t.decimal "point_amount", precision: 10, scale: 2, null: false
     t.string "description"
     t.index ["origin_wallet_id"], name: "index_transactions_on_origin_wallet_id"
+    t.index ["purchase_id"], name: "index_transactions_on_purchase_id"
     t.index ["reference_id"], name: "index_transactions_on_reference_id"
     t.index ["target_wallet_id"], name: "index_transactions_on_target_wallet_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
@@ -202,6 +204,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_07_24_005459) do
   add_foreign_key "profiles", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "purchases", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "\"references\"", column: "reference_id", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "transactions", "purchases", on_update: :cascade, on_delete: :cascade
   add_foreign_key "transactions", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "wallets", column: "origin_wallet_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "wallets", column: "target_wallet_id", on_update: :cascade, on_delete: :restrict

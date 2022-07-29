@@ -19,7 +19,7 @@ RSpec.describe Purchase, type: :model do
     subject { build(:purchase) }
 
     it { is_expected.to belong_to(:user).optional(false) }
-    it { is_expected.to validate_presence_of(:code) }
+    # it { is_expected.to validate_presence_of(:code) }
     # it { is_expected.to validate_uniqueness_of(:code) }
   end
 end

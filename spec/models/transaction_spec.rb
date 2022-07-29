@@ -17,6 +17,7 @@ RSpec.describe Transaction, type: :model do
     it { is_expected.to belong_to(:target_wallet).class_name("Wallet") }
     it { is_expected.to belong_to(:reference) }
     it { is_expected.to belong_to(:withdraw).required(false) }
+    it { is_expected.to belong_to(:purchase).required(false) }
   end
 
   describe "validations" do
