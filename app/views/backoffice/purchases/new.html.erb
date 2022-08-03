@@ -3,37 +3,39 @@
     <div class="col-8">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Compra de Tokens</h5>
-          <div class="row">
-            <div class="col-md-6">
-              <%= form_for @purchase, as: :purchase, url: backoffice_purchases_path, method: :post do |f| %>
-                <% flash.each do |type, msg| %>
-                  <div class="alert alert-info">
-                    <%= msg %>
-                  </div>
-                <% end %>
-                <div class="mb-3">
-                  <%= f.label :amount, class: "form-label" %><br />
-                  <%= f.text_field :amount, class: "form-control", required: true %>
-                </div>
-                <div class="d-flex justify-content-end">
-                  <%= f.submit "Comprar", class: "btn btn-success" %>
+          <h5 class="card-title">Compra de Token</h5>
+          <%= form_for @purchase, as: :purchase, url: backoffice_purchases_path, method: :post do |f| %>
+            <div class="row">
+              <% flash.each do |type, msg| %>
+                <div class="alert alert-info">
+                  <%= msg %>
                 </div>
               <% end %>
+              <div class="col">
+                <%= label_tag :balance, "Token", class: "form-label" %><br />            
+                <select class="form-select">
+                  <option selected>Selecione o token...</option>
+                  <option value="btc">BTC - R$ 1,00</option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <%= f.label :amount, class: "form-label" %><br />
+                <div class="input-group">
+                  <%= f.text_field :amount, class: "form-control", required: true %>
+                  <div class="input-group-text">.00</div>
+                </div>
+              </div>
+              <div class="col-auto">
+                <label class="form-label">&nbsp;</label><br/>
+                <%= f.submit "Comprar", class: "btn btn-success" %>
+              </div>
             </div>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>
     <div class="col-4">
       <%= render "partials/card_wallet" -%>
-      <div class="card mt-3">
-        <div class="card-body">
-          <h5 class="card-title">Token</h5>
-          <p>A Harbor trabalha com tokens. O que é a Tokenização? É o processo de converter algo de valor (ativo) em frações digitais (ou tokens) para que possam ser facilmente negociados. Ativos tokenizados podem ser tangíveis (apartamento, micro usina solar) ou intangíveis (energia).</p>
-          <button type="button" class="btn btn-primary">Action button</button>
-        </div>
-      </div>
     </div>
   </div>
 </div>
