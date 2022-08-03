@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/workspace'
+rake db:drop && rake db:create && rake db:migrate && rake db:seed
+make: Leaving directory '/workspace'
+ 

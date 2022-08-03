@@ -1,5 +1,7 @@
 class Backoffice::OverviewController < ApplicationController
   before_action :authenticate_user!
 
-  def index; end
+  def index
+    @transactions = Transaction.all
+  end
 end

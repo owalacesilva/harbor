@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light py-4">
+<nav class="navbar navbar-expand-lg navbar-dark py-4" style="background-color: #2E294E">
   <div class="container">
     <a class="navbar-brand" href="#">
       <%= image_tag 'logo_default.png', alt: "Logo Company", height: '24', class: 'd-inline-block align-text-top' %>
@@ -21,7 +21,7 @@
   </div>
 </nav>
 <div class="container py-3 mb-3">
-  <ul class="nav nav-pills">
+  <ul class="nav nav-pills nav-fill">
     <li class="nav-item">
       <%= link_to "Dashboard", backoffice_overview_path, class: "nav-link active" %>
     </li>

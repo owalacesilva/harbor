@@ -1,2 +1,143 @@
-<h1>Backoffice::Transactions#show</h1>
-<p>Find me in app/views/backoffice/transactions/show.html.erb</p>
+<div class="container py-3 mb-3">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title mb-4">Detalhes da Movimentação</h5>
+      <div class="border border-dark rounded border-1 p-3 mb-4">
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-2">
+              <span>Data</span>
+            </div>
+            <span><%= @transaction.created_at -%><span>
+          </div>
+          <div class="col-3">
+            <div class="mb-2">
+              <span>Status</span>
+            </div>
+            <span class="badge bg-danger">
+              <%= @transaction.operation -%>
+            </span>
+          </div>
+          <div class="col-3">
+            <div class="mb-2">
+              <span>Operação</span>
+            </div>
+            <span class="badge bg-success">
+              <%= @transaction.operation -%>
+            </span>
+          </div>
+        </div>
+      </div>
+      <h6>Informações</h6>
+      <div class="border border-dark rounded border-1 mb-4">
+        <ul class="list-unstyled m-0">
+          <li>
+            <div class="d-flex align-items-start">
+              <div class="col-3 p-3">
+                <span>Tipo de Movimentação</span>
+              </div>
+              <div class="col p-3">
+                <span>Compra<span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-start">
+              <div class="col-3 p-3">
+                <span>Gateway de Pagamento</span>
+              </div>
+              <div class="col p-3">
+                <span>Depósito bancário<span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-start">
+              <div class="col-3 p-3">
+                <span>Origem</span>
+              </div>
+              <div class="col p-3">
+                <span><%= @transaction.origin_wallet.user.full_name -%><span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-start">
+              <div class="col-3 p-3">
+                <span>Autenticação</span>
+              </div>
+              <div class="col p-3">
+                <span><%= @transaction.code -%><span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-start">
+              <div class="col-3 p-3">
+                <span>Destinatário</span>
+              </div>
+              <div class="col p-3">
+                <span><%= @transaction.target_wallet.user.full_name -%><span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-start">
+              <div class="col-3 p-3">
+                <span>Detalhes</span>
+              </div>
+              <div class="col p-3">
+                <span>Compra de Tokens<span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <h6>Detalhes do Token</h6>
+      <div class="border border-dark rounded border-1">
+        <ul class="list-unstyled m-0">
+          <li>
+            <div class="d-flex align-items-start">
+              <div class="col-3 p-3">
+                <span>Valor</span>
+              </div>
+              <div class="col p-3">
+                <span><%= @transaction.amount -%><span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-start">
+              <div class="col-3 p-3">
+                <span>Quantidade de Token</span>
+              </div>
+              <div class="col p-3">
+                <span><%= @transaction.point_amount -%><span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-start">
+              <div class="col-3 p-3">
+                <span>Bônus do Token</span>
+              </div>
+              <div class="col p-3">
+                <span>0<span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-start">
+              <div class="col-3 p-3">
+                <span>Total de Tokens</span>
+              </div>
+              <div class="col p-3">
+                <span><%= @transaction.point_amount -%><span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

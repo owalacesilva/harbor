@@ -29,7 +29,7 @@
                 <td><%= item.amount %></td>
                 <td>
                   <div class="d-flex justify-content-center">
-                    <button type="button" class="btn btn-primary btn-sm">Detalhes</button>
+                    <%= link_to "Detalhes", backoffice_transaction_path(item.id), type: "button", class: "btn btn-primary btn-sm" -%>
                   </div>
                 </td>
               </tr>

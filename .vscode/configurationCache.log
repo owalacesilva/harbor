@@ -1,0 +1,1 @@
+{"buildTargets":["dbrenew","dbsetup","deploy","up"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}

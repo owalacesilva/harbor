@@ -7,4 +7,7 @@ class Reference < ApplicationRecord
   validates :unique_name, presence: true
   validates :unique_name, uniqueness: true
   validates :display_name, presence: true
+
+  scope :uname, ->(name) { where(unique_name: name).last }
+  scope :token, -> { where(unique_name: :token).last }
 end
