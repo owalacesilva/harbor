@@ -9,6 +9,7 @@ describe BuyTokenOrganizer, type: :organizer do
         [
           CreateTokenPurchaseInteractor,
           CreateTransactionPurchaseInteractor,
+          CreateTransactionPaymentInteractor,
         ]
       end
 

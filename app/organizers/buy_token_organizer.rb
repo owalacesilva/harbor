@@ -4,5 +4,6 @@ class BuyTokenOrganizer
   include Interactor::Organizer
 
   organize CreateTokenPurchaseInteractor,
-           CreateTransactionPurchaseInteractor
+           CreateTransactionPurchaseInteractor,
+           CreateTransactionPaymentInteractor
 end
