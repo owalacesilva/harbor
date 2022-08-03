@@ -30,6 +30,9 @@ Rails.application.routes.draw do
 
     resources :purchases
     resources :transactions, only: [:index, :show]
+    resources :withdraws, only: [:index, :show, :create, :cancel] do
+      post 'cancel', on: :member
+    end
   end
 
   # Defines the root path route ("/")
