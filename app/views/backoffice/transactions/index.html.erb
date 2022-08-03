@@ -7,6 +7,7 @@
           <tr>
             <th scope="col">COD</th>
             <th scope="col">Data</th>
+            <th scope="col">Operação</th>
             <th scope="col">Tokens</th>
             <th scope="col">Valor</th>
           </tr>
@@ -23,10 +24,17 @@
           <% else -%>
             <% @transactions.each do |item| -%>
               <tr>
-                <td scope="row"><%= item.code %></td>
+                <td scope="row"><%= item.code.upcase %></td>
                 <td><%= item.created_at %></td>
-                <td><%= item.point_amount %></td>
-                <td><%= item.amount %></td>
+                <td>
+                  <% if item.operation == 'income' %>
+                    <label class="badge rounded-pill bg-success">Entrada</label>
+                  <% else %>
+                    <label class="badge rounded-pill bg-danger">Saida</label>
+                  <%- end %>
+                </td>
+                <td><%= item.point_amount %> BTC</td>
+                <td>R$ <%= item.amount %></td>
                 <td>
                   <div class="d-flex justify-content-center">
                     <%= link_to "Detalhes", backoffice_transaction_path(item.id), type: "button", class: "btn btn-primary btn-sm" -%>
