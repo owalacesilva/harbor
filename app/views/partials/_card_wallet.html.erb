@@ -1,0 +1,21 @@
+<div class="card text-white bg-primary">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-3">
+        <%= image_tag "token.png", alt: "Avatar Token", class: "img-fluid" %>
+      </div>
+      <div class="col">
+        <div>
+          <strong class="text-uppercase">quantidade de tokens</strong>
+        </div>
+        <span class="fs-4"><%= current_user.wallet.balance -%></span><span class="px-1">BTC</span>
+      </div>
+    </div>
+    <div class="mt-4">
+      <div>
+        <strong class="text-uppercase">total já investido</strong>
+      </div>
+      <span class="fs-5">R$ <%= current_user.wallet.incomes -%></span>
+    </div>
+  </div>
+</div>
