@@ -1,0 +1,36 @@
+// Place all the styles related to the institutional/home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+/*===========================
+01.COMMON css 
+===========================*/
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arimo;
+  font-weight: normal;
+  font-style: normal;
+  color: #5B657E;
+  overflow-x: hidden;
+}
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#25d366;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+  font-size:30px;
+	box-shadow: 2px 2px 3px #999;
+  z-index:100;
+}
+
+.my-float{
+	margin-top:16px;
+}

@@ -1,8 +1,19 @@
-<h1>Harbor</h1>
-<ul>
-  <li><%= link_to "Login Usuário", new_session_path(:user) %></li>
-  <li><%= link_to "Cadastro Usuário", new_registration_path(:user) %></li>
-  <li></hr></li>
-  <li><%= link_to "Login Funcionário", new_session_path(:account) %></li>
-  <li><%= link_to "Cadastro Funcionário", new_registration_path(:account) %></li>
-</ul>
+<div class="container">
+  <div style="padding: 60px 0px;">
+    <a href="/" class="text-decoration-none">
+      <%= image_tag 'logo360', style: 'max-height: 50px;padding: 5px 0px;' %>
+    </a>
+  </div>
+  <div class="row justify-content-center align-items-center">
+    <div class="col-sm-12 col-md-6 mb-5">
+      <h1 class="display-5">Software de gestão de Investimentos e afiliados</h1>
+      <p class="lead">Desenvolvemos um software profissional com ferramentas essências para administração e controle de toda rede de afiliados e distribuidores, um software simples e eficiente.</p>
+      <div>
+        <%= link_to "Ver demonstração", backoffice_overview_path, class: "btn btn-success btn-lg" -%>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 mb-5">
+      <%= image_tag "startup", class: "img-fluid" %>
+    </div>
+  </div>
+</div>
