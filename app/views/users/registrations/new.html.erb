@@ -1,57 +1,150 @@
-<h2>Sign up</h2>
+<style>
+html,
+body {
+  height: 100%;
+}
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-  
-  <%= f.fields_for :profile_attributes do |p_builder| %>
-    <div class="field">
-      <%= p_builder.label :first_name %><br />
-      <%= p_builder.text_field :first_name, autocomplete: "first_name" %>
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signup {
+  width: 100%;
+  max-width: 960px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signup .checkbox {
+  font-weight: 400;
+}
+
+.form-signup .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signup input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signup input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>
+<div class="form-signup">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <%= image_tag 'logo360', style: 'max-height: 50px;padding: 5px 0px;' %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>
+        <%= f.fields_for :profile_attributes, @user.profile do |p| %>
+          <div class="card mb-4">
+            <h6 class="card-header">
+              <%= fa_icon "user-circle fw" %> Dados Pessoais
+            </h6>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <%= p.label :first_name, class: "form-label" %>
+                    <b class="text-danger">*</b>
+                    <%= p.text_field :first_name, autofocus: true, class: "form-control", required: true %>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <%= p.label :last_name, class: "form-label" %>
+                    <%= p.text_field :last_name, class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <%= p.label :gender, class: "form-label" %>
+                    <% @gender_values = { 'male': 'Masculino', 'female': 'Feminino' } %>
+                    <%= p.select :gender, options_from_collection_for_select(@gender_values, :first, :last, '2'), { include_blank: false, prompt: 'Selecione um sexo' }, { class: "form-control" } %>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <%= p.label :birth_date, class: "form-label" %>
+                    <b class="text-danger">*</b>
+                    <%= p.text_field :birth_date, class: "form-control", required: true %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-4">
+            <h6 class="card-header">
+              <%= fa_icon "phone-square fw" %> Contato
+            </h6>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <%= p.label :phone_number, class: "form-label" %>
+                    <b class="text-danger">*</b>
+                    <%= p.text_field :phone_number, class: "form-control", required: true %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="card mb-4">
+          <h6 class="card-header">
+            <%= fa_icon "key fw" %> Dados de acesso
+          </h6>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="mb-3">
+                  <%= f.label :email, class: "form-label" %>
+                  <b class="text-danger">*</b>
+                  <%= f.email_field :email, autocomplete: "email", class: "form-control", required: true %>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="mb-3">
+                  <%= f.label :email_confirmation, class: "form-label" %>
+                  <b class="text-danger">*</b>
+                  <%= f.email_field :email_confirmation, class: "form-control", required: true %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="mb-3">
+                  <%= f.label :password, class: "form-label" %>
+                  <b class="text-danger">*</b>
+                  <%= f.password_field :password, autocomplete: "new-password", class: "form-control", required: true %>
+                  <small class="text-muted mb-0">Sua senha precisa conter no mínimo 8 caracteres (letras e números e ao menos 1 letra maiúscula e 1 letra minúscula)</small>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="mb-3">
+                  <%= f.label :password_confirmation, class: "form-label" %>
+                  <b class="text-danger">*</b>
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", required: true %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <%= f.submit "Finalizar cadastro", class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
-
-    <div class="field">
-      <%= p_builder.label :last_name %><br />
-      <%= p_builder.text_field :last_name, autocomplete: "last_name" %>
-    </div>
-
-    <div class="field">
-      <%= p_builder.label :gender %><br />
-      <%= p_builder.radio_button :gender, "male" %> Homem
-      <%= p_builder.radio_button :gender, "famale" %> Mulher
-    </div>
-
-    <div class="field">
-      <%= p_builder.label :birth_date %><br />
-      <%= p_builder.date_field :birth_date, value: "1922-01-01" %>
-    </div>
-
-    <div class="field">
-      <%= p_builder.label :phone_number %><br />
-      <%= p_builder.text_field :phone_number, autocomplete: "phone_number" %>
-    </div>
-  <%- end %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>
