@@ -101,10 +101,14 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
   create_table "purchases", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "code", limit: 45, null: false
     t.bigint "user_id", null: false
-    t.decimal "amount", precision: 10, scale: 2, null: false
+    t.bigint "reference_id", null: false
+    t.string "code", limit: 45, null: false
+    t.string "status", null: false
+    t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "total", precision: 10, scale: 2, default: "0.0", null: false
     t.string "description"
+    t.index ["reference_id"], name: "index_purchases_on_reference_id"
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
@@ -114,6 +118,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
     t.string "unique_name", limit: 45, null: false
     t.string "display_name", limit: 45
     t.string "description", limit: 255
+    t.decimal "unit_price", precision: 10, scale: 2, default: "0.0", null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -202,6 +207,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
   add_foreign_key "addresses", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "banking_accounts", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "profiles", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "purchases", "\"references\"", column: "reference_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "purchases", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "\"references\"", column: "reference_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "purchases", on_update: :cascade, on_delete: :cascade

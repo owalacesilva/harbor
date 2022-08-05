@@ -6,11 +6,14 @@ class CreatePurchases < ActiveRecord::Migration[7.1]
       # Timestamps
       t.timestamps null: false
 
-      t.string :code, null: false, limit: 45, unique: true
-
+      # References
       t.references :user, null: false, foreign_key: { on_delete: :restrict, on_update: :cascade }
+      t.references :reference, null: false, foreign_key: { on_delete: :restrict, on_update: :cascade }
 
-      t.decimal :amount, precision: 10, scale: 2, null: false
+      t.string :code, null: false, limit: 45, unique: true
+      t.string :status, null: false
+      t.decimal :amount, precision: 10, scale: 2, null: false, default: "0.0"
+      t.decimal :total, precision: 10, scale: 2, null: false, default: "0.0"
       t.string :description
     end
   end

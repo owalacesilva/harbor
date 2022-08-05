@@ -9,6 +9,7 @@ class CreateReferences < ActiveRecord::Migration[7.1]
       t.string :unique_name, null: false, limit: 45, unique: true
       t.string :display_name, limit: 45
       t.string :description, limit: 255
+      t.decimal :unit_price, precision: 10, scale: 2, null: false, default: "0.0"
     end
   end
 

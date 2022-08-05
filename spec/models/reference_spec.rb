@@ -14,6 +14,7 @@ RSpec.describe Reference, type: :model do
 
     it { is_expected.to have_many(:wallets).dependent(:destroy) }
     it { is_expected.to have_many(:transactions).dependent(:destroy) }
+    it { is_expected.to have_many(:purchases).dependent(:destroy) }
   end
 
   describe ".validations" do

@@ -2,10 +2,10 @@ class Backoffice::PurchasesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @purchases = Purchase.order(created_at: :desc)
   end
 
-  def show
-  end
+  def show;end
 
   def new
     @purchase = Purchase.new
