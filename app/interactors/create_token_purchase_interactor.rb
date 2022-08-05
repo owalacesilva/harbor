@@ -5,7 +5,7 @@ class CreateTokenPurchaseInteractor
 
   def call
 
-    context.purchase = Purchase.new(user_id: find_user.id, amount: amount)
+    context.purchase = Purchase.new(purchase_params)
     context.purchase.save!
   rescue ActiveRecord::RecordNotFound => e
     context.fail!(message: e.message)
@@ -21,10 +21,23 @@ class CreateTokenPurchaseInteractor
     context.user ||= User.find(context.user_id)
   end
 
+  def find_reference
+    context.reference ||= Reference.token
+  end
+
   def amount
     amount = Integer(context.amount)
     return nil unless amount.positive?
 
     amount
+  end
+
+  def total
+    (amount * find_reference.unit_price).to_f
+  end
+
+  def purchase_params
+    { user_id: find_user.id, reference: find_reference,
+      amount: amount, total: total, status: Purchase.statuses[:pending] }
   end
 end
