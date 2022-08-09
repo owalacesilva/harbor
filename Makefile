@@ -20,3 +20,6 @@ console:
 
 sandbox:
 	bundle exec rails console --sandbox
+
+ssh-agent:
+	eval `ssh-agent` && ssh-add ~/.ssh/github_rsa
