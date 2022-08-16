@@ -20,6 +20,8 @@ services:
     stdin_open: true
     tty: true
     volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
       - bundle:/usr/local/bundle
       - ..:/workspace:cached
       - ~/.ssh:/home/vscode/.ssh
