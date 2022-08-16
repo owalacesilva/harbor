@@ -1,6 +1,9 @@
 {
   "name": "Harbor",
   "private": true,
+  "engines": {
+    "node": "16.15.0"
+  },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "@rails/webpacker": "5.4.3",
