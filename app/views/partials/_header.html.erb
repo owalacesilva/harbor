@@ -23,16 +23,19 @@
 <div class="container py-3 mb-3">
   <ul class="nav nav-pills nav-fill">
     <li class="nav-item">
-      <%= link_to "Dashboard", backoffice_overview_path, class: "nav-link active" %>
+      <%= link_to "Dashboard", backoffice_overview_path, class: "nav-link #{active_class_multiple([backoffice_overview_path])}" %>
     </li>
     <li class="nav-item">
-      <%= link_to "Pedidos de Compra", backoffice_purchases_path, class: "nav-link" %>
+      <%= link_to "Pedidos de Compra", backoffice_purchases_path, class: "nav-link #{active_class_multiple([backoffice_purchases_path, new_backoffice_purchase_path])}" %>
     </li>
     <li class="nav-item">
-      <%= link_to "Solicitações de Saques", backoffice_withdraws_path, class: "nav-link" %>
+      <%= link_to "Solicitações de Saques", backoffice_withdraws_path, class: "nav-link #{active_class_multiple([backoffice_withdraws_path])}" %>
     </li>
     <li class="nav-item">
-      <%= link_to "Movimentações", backoffice_transactions_path, class: "nav-link" %>
+      <%= link_to "Movimentações", backoffice_transactions_path, class: "nav-link #{active_class_multiple([backoffice_transactions_path])}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Minha Conta", backoffice_profile_path, class: "nav-link #{active_class_multiple([backoffice_profile_path, backoffice_account_password_path])}" %>
     </li>
   </ul>
 </div>
