@@ -1,0 +1,13 @@
+directories:
+  "app/helpers**":
+    UtilityFunction:
+      enabled: false
+  "app/workers**":
+    UtilityFunction:
+      enabled: false
+  "app/jobs**":
+    UtilityFunction:
+      enabled: false
+
+exclude_paths:
+  - db/migrate
