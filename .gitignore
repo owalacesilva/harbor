@@ -39,3 +39,6 @@
 yarn-debug.log*
 .yarn-integrity
 secrets.yml
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
