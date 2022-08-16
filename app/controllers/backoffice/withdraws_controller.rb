@@ -2,7 +2,8 @@ class Backoffice::WithdrawsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @withdraws = Withdraw.order(created_at: :desc)
+    @filters = define_filters('withdraws')
+    @withdraws = current_user.withdraws.order(created_at: :desc)
   end
 
   def show

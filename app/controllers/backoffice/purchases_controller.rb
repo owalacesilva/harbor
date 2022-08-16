@@ -2,7 +2,8 @@ class Backoffice::PurchasesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @purchases = Purchase.order(created_at: :desc)
+    @filters = define_filters('purchases')
+    @purchases = current_user.purchases.order(created_at: :desc)
   end
 
   def show;end

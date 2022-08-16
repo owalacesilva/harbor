@@ -1,14 +1,72 @@
 <div class="container py-3 mb-3">
-  <div class="card">
-    <div class="card-body">
-      <div class="row mb-4">
-        <div class="col">
-          <h5 class="card-title">Compras de Tokens</h5>
-        </div>
-        <div class="col d-flex justify-content-end">
-          <%= link_to "Comprar Token", new_backoffice_purchase_path, class: "btn btn-primary" %>
-        </div>
+  <div class="row mb-4">
+    <div class="col">
+      <h5 class="fw-bold">Compras de Tokens</h5>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%= link_to "Comprar Token", new_backoffice_purchase_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+  <div class="filter">
+    <nav class="navbar navbar-dark bg-primary">
+      <form class="container-fluid justify-content-start">
+        <button type="button" id="toggle_filter" class="btn btn-light btn-sm me-2">Esconder</button>
+        <button type="button" id="clear_filter" class="btn btn-light btn-sm">Limpar filtro</button>
+      </form>
+    </nav>
+    <div id="content_filter" class="card">
+      <div class="card-body">
+        <form class="form">
+          <div class="row">
+            <div class="col-3">
+              <div class="input-group">
+                <div class="input-group-text">De</div>
+                <%= date_field_tag :from_date, nil, class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="input-group">
+                <div class="input-group-text">Até</div>
+                <%= date_field_tag :to_date, nil, class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="mb-3">
+                <%= text_field_tag :code, nil, class: "form-control", placeholder: "Código Pedido" %>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="mb-3">
+                <%= text_field_tag :status, nil, class: "form-control", placeholder: "Situação Pedido" %>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="input-group">
+                <div class="input-group-text">Valor maior</div>
+                <%= text_field_tag :value_greater_than, nil, class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="input-group">
+                <div class="input-group-text">Valor menor</div>
+                <%= text_field_tag :value_less_than, nil, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="row g-1 justify-content-end">
+            <div class="col-auto">
+              <%= submit_tag "Filtrar", class: "btn btn-success" %>
+            </div>
+            <div class="col-auto">
+              <%= link_to 'Limpar filtro', backoffice_purchases_path(clear_filter: true), class: 'btn btn-light btn-danger-hover', data: { disable_with: 'Limpando...' } %>
+            </div>
+          </div>
+        </form>
       </div>
+    </div>
+  </div>
+  <div class="card mt-3">
+    <div class="card-body">
       <table class="table table-striped table-hover">
         <thead>
           <tr>

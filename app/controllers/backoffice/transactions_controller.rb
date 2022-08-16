@@ -2,7 +2,8 @@ class Backoffice::TransactionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @transactions = Transaction.all
+    @filters = define_filters('transactions')
+    @transactions = current_user.transactions.order(created_at: :desc)
   end
 
   def show
