@@ -1,5 +1,8 @@
 # Define required macros here
 
+dbsetup:
+	rake db:setup && rake db:migrate && rake db:seed
+
 dbrenew:
 	rake db:drop && rake db:create && rake db:migrate && rake db:seed
 
@@ -8,9 +11,6 @@ deploy:
 
 up:
 	RAILS_ENV=development bash ./server.sh
-
-dbsetup:
-	rake db:setup && rake db:migrate && rake db:seed
 
 guard:
 	bundle exec guard
