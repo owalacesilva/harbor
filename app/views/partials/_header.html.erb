@@ -23,19 +23,29 @@
 <div class="container py-3 mb-3">
   <ul class="nav nav-pills nav-fill">
     <li class="nav-item">
-      <%= link_to "Dashboard", backoffice_overview_path, class: "nav-link #{active_class_multiple([backoffice_overview_path])}" %>
+      <%= link_to backoffice_overview_path, class: "nav-link #{active_class_multiple([backoffice_overview_path])}" do %>
+        <%= fa_icon "home lg" %><span>&nbsp;</span>Dashboard
+      <%- end %>
     </li>
     <li class="nav-item">
-      <%= link_to "Pedidos de Compra", backoffice_purchases_path, class: "nav-link #{active_class_multiple([backoffice_purchases_path, new_backoffice_purchase_path])}" %>
+      <%= link_to backoffice_purchases_path, class: "nav-link #{active_class_multiple([backoffice_purchases_path, new_backoffice_purchase_path])}" do %>
+        <%= fa_icon "shopping-cart lg" %><span>&nbsp;</span>Pedidos de Compra
+      <%- end %>
     </li>
     <li class="nav-item">
-      <%= link_to "Solicitações de Saques", backoffice_withdraws_path, class: "nav-link #{active_class_multiple([backoffice_withdraws_path])}" %>
+      <%= link_to backoffice_withdraws_path, class: "nav-link #{active_class_multiple([backoffice_withdraws_path])}" do %>
+        <%= fa_icon "usd lg" %><span>&nbsp;</span>Solicitações de Saques
+      <%- end %>
     </li>
     <li class="nav-item">
-      <%= link_to "Movimentações", backoffice_transactions_path, class: "nav-link #{active_class_multiple([backoffice_transactions_path])}" %>
+      <%= link_to backoffice_transactions_path, class: "nav-link #{active_class_multiple([backoffice_transactions_path])}" do %>
+        <%= fa_icon "line-chart lg" %><span>&nbsp;</span>Movimentações
+      <%- end %>
     </li>
     <li class="nav-item">
-      <%= link_to "Minha Conta", backoffice_profile_path, class: "nav-link #{active_class_multiple([backoffice_profile_path, backoffice_account_password_path])}" %>
+      <%= link_to backoffice_profile_path, class: "nav-link #{active_class_multiple([backoffice_profile_path, backoffice_account_password_path])}" do %>
+        <%= fa_icon "user-circle lg" %><span>&nbsp;</span>Minha Conta
+      <%- end %>
     </li>
   </ul>
 </div>
