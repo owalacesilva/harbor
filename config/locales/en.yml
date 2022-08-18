@@ -41,3 +41,6 @@ en:
         canceled: Cancelado
         refused: Recusado
         paid: Pago
+      transaction/operation:
+        income: Rendimento
+        expense: Despesa

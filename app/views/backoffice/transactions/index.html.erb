@@ -37,8 +37,8 @@
             </div>
             <div class="col-3">
               <div class="mb-3">
-                <% operation = { 'Entrada': 'income', 'Saida': 'expense'} %>
-                <%= select_tag :operation, options_for_select(operation, @filters.operation), { prompt: "Operação", class: 'form-control chosen-select' } %>
+                <% operations = human_attribute_enum('transaction', Transaction.operations, 'operation') %>
+                <%= select_tag :operation, options_for_select(operations, @filters.operation), { prompt: "-- Selecione a Operação --", class: 'form-control chosen-select' } %>
               </div>
             </div>
             <div class="col-3">
