@@ -3,7 +3,7 @@ class Backoffice::PurchasesController < ApplicationController
 
   def index
     @filters = define_filters('purchases')
-    @purchases = current_user.purchases.order(created_at: :desc)
+    @purchases = PurchasesQuery.call(relation: current_user, filters: @filters)
   end
 
   def show;end

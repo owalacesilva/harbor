@@ -21,41 +21,42 @@
             <div class="col-3">
               <div class="input-group">
                 <div class="input-group-text">De</div>
-                <%= date_field_tag :from_date, nil, class: "form-control" %>
+                <%= date_field_tag :from_date, @filters.from_date, class: "form-control" %>
               </div>
             </div>
             <div class="col-3">
               <div class="input-group">
                 <div class="input-group-text">Até</div>
-                <%= date_field_tag :to_date, nil, class: "form-control" %>
+                <%= date_field_tag :to_date, @filters.to_date, class: "form-control" %>
               </div>
             </div>
             <div class="col-3">
               <div class="mb-3">
-                <%= text_field_tag :code, nil, class: "form-control", placeholder: "Código Pedido" %>
+                <%= text_field_tag :code, @filters.code, class: "form-control", placeholder: "Código Pedido" %>
               </div>
             </div>
             <div class="col-3">
               <div class="mb-3">
-                <%= text_field_tag :status, nil, class: "form-control", placeholder: "Situação Pedido" %>
+                <% statuses = human_attribute_enum('purchase', Purchase.statuses, 'status') %>
+                <%= select_tag :status, options_for_select(statuses, @filters.status), { prompt: "-- Selecione um status --", class: 'form-control chosen-select' } %>
               </div>
             </div>
             <div class="col-3">
               <div class="input-group">
                 <div class="input-group-text">Valor maior</div>
-                <%= text_field_tag :value_greater_than, nil, class: "form-control" %>
+                <%= text_field_tag :value_greater_than, @filters.value_greater_than, class: "form-control" %>
               </div>
             </div>
             <div class="col-3">
               <div class="input-group">
                 <div class="input-group-text">Valor menor</div>
-                <%= text_field_tag :value_less_than, nil, class: "form-control" %>
+                <%= text_field_tag :value_less_than, @filters.value_less_than, class: "form-control" %>
               </div>
             </div>
           </div>
           <div class="row g-1 justify-content-end">
             <div class="col-auto">
-              <%= submit_tag "Filtrar", class: "btn btn-success" %>
+              <%= submit_tag "Filtrar", class: "btn btn-success", data: { disable_with: 'Filtrando...' } %>
             </div>
             <div class="col-auto">
               <%= link_to 'Limpar filtro', backoffice_purchases_path(clear_filter: true), class: 'btn btn-light btn-danger-hover', data: { disable_with: 'Limpando...' } %>
@@ -81,7 +82,7 @@
         <tbody>
           <% if @purchases.empty? -%>
             <tr>
-              <td colspan="5">
+              <td colspan="6">
                 <div class="d-flex justify-content-center">
                   <span>Nenhuma compra encontrada</span>
                 </div>
