@@ -12,6 +12,9 @@ deploy:
 up:
 	RAILS_ENV=development bash ./server.sh
 
+up-staging:
+	RAILS_ENV=staging bash ./server.sh
+
 guard:
 	bundle exec guard
 
