@@ -21,7 +21,7 @@
               <div class="col">
                 <%= label_tag :balance, "Conta destino", class: "form-label" %><br />            
                 <select class="form-select" id="autoSizingSelect">
-                  <option selected>Choose...</option>
+                  <option selected>Esclha uma conta...</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
@@ -54,27 +54,31 @@
             <div class="col-3">
               <div class="input-group">
                 <div class="input-group-text">De</div>
-                <%= date_field_tag :from_date, nil, class: "form-control" %>
+                <%= date_field_tag :from_date, @filters.from_date, class: "form-control" %>
               </div>
             </div>
             <div class="col-3">
               <div class="input-group">
                 <div class="input-group-text">Até</div>
-                <%= date_field_tag :to_date, nil, class: "form-control" %>
+                <%= date_field_tag :to_date, @filters.to_date, class: "form-control" %>
               </div>
             </div>
             <div class="col-3">
               <div class="mb-3">
-                <%= text_field_tag :status, nil, class: "form-control", placeholder: "Situação Pedido" %>
+                <% options = { 'Negado': false, 'Aprovado': true } %>
+                <%= select_tag :approved, options_for_select(options, @filters.approved), { prompt: "-- Selecione um Status --", class: 'form-control chosen-select' } %>
               </div>
             </div>
             <div class="col-3">
-              <%= text_field_tag :value, nil, class: "form-control", placeholder: "Valor" %>
+              <div class="input-group">
+                <%= text_field_tag :balance, @filters.balance, class: "form-control", placeholder: "Valor" %>
+                <div class="input-group-text">.00</div>
+              </div>
             </div>
           </div>
           <div class="row g-1 justify-content-end">
             <div class="col-auto">
-              <%= submit_tag "Filtrar", class: "btn btn-success" %>
+              <%= submit_tag "Filtrar", class: "btn btn-success", data: { disable_with: 'Filtrando...' } %>
             </div>
             <div class="col-auto">
               <%= link_to 'Limpar filtro', backoffice_withdraws_path(clear_filter: true), class: 'btn btn-light btn-danger-hover', data: { disable_with: 'Limpando...' } %>

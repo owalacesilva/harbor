@@ -3,7 +3,7 @@ class Backoffice::WithdrawsController < ApplicationController
 
   def index
     @filters = define_filters('withdraws')
-    @withdraws = current_user.withdraws.order(created_at: :desc)
+    @withdraws = WithdrawsQuery.call(relation: current_user, filters: @filters)
   end
 
   def show
