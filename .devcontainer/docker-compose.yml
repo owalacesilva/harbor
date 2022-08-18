@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        RUBY_VERSION: '3.0'
+        RUBY_VERSION: '2.7'
         NODE_VERSION: 'lts/*'
         PG_MAJOR: '12'
         BUNDLER_VERSION: '2.3.7'
