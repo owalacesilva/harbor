@@ -26,7 +26,7 @@ class TransactionsQuery < ApplicationQuery
     return scope if filters[filter].blank?
 
     send("filter_by_#{filter}", scope, filters[filter])
-  end
+  end 
 
   def filter_by_description(scope, value)
     scope.where("description LIKE :value", value: "%#{value}%")
