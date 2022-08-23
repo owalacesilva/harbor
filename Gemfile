@@ -31,6 +31,9 @@ gem "jbuilder"
 # Devise authenticate
 gem "devise"
 
+# Gem Kaminari
+gem 'kaminari'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

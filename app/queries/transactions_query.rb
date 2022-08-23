@@ -18,9 +18,6 @@ class TransactionsQuery < ApplicationQuery
       .yield_self { |scope| apply_filter(scope, :amount) }
       .yield_self { |scope| apply_filter(scope, :point_amount) }
       .yield_self { |scope| apply_filter(scope, :description) }
-      .yield_self { |scope| apply_paginate(scope) }
-      .yield_self { |scope| apply_limit(scope) }
-      .yield_self { |scope| apply_order(scope) }
   end
 
   private
@@ -29,25 +26,6 @@ class TransactionsQuery < ApplicationQuery
     return scope if filters[filter].blank?
 
     send("filter_by_#{filter}", scope, filters[filter])
-  end
-
-  def apply_paginate(scope)
-    return scope if filters[:page].nil? || filters[:limit].nil?
-
-    scope.page(filters[:page]).per(filters[:limit])
-  end
-
-  def apply_limit(scope)
-    return scope if filters[:limit].nil?
-
-    scope.limit(filters[:limit])
-  end
-
-  def apply_order(scope)
-    return scope if filters[:order].nil?
-
-    scope.order(code: :asc) if filters[:order].eql?("code-asc")
-    scope
   end
 
   def filter_by_description(scope, value)

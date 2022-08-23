@@ -91,7 +91,7 @@
           <% else -%>
             <% @transactions.each do |item| -%>
               <tr>
-                <td scope="row"><%= item.code %></td>
+                <td scope="row"><%= item.id %></td>
                 <td><%= item.created_at %></td>
                 <td><%= item.code %></td>
                 <td>
@@ -113,6 +113,9 @@
           <% end -%>
         </tbody>
       </table>
+      <div class="d-none d-sm-block">
+        <%= paginate @transactions %>
+      </div>
     </div>
   </div>
 </div>

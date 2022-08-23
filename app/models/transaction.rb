@@ -18,4 +18,6 @@ class Transaction < ApplicationRecord
   validates :code, presence: true
   validates :code, uniqueness: true
   validates :operation, presence: true
+
+  paginates_per 10
 end
