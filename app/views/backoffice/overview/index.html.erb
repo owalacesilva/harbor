@@ -41,9 +41,9 @@
                 <% else -%>
                   <% @transactions.each do |item| -%>
                     <tr>
-                      <td><%= item.created_at %></td>
-                      <td><%= item.point_amount %></td>
-                      <td><%= item.amount %></td>
+                      <td><%= item.joined_at %></td>
+                      <td><%= item.point_amount_formatted %></td>
+                      <td><%= item.amount_formatted %></td>
                       <td>
                         <div class="d-flex justify-content-center">
                           <%= link_to "Detalhes", backoffice_transaction_path(item.id), type: "button", class: "btn btn-primary btn-sm" -%>
