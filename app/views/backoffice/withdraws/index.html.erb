@@ -52,16 +52,8 @@
         <form class="form">
           <div class="row">
             <div class="col-3">
-              <div class="input-group">
-                <div class="input-group-text">De</div>
-                <%= date_field_tag :from_date, @filters.from_date, class: "form-control" %>
-              </div>
-            </div>
-            <div class="col-3">
-              <div class="input-group">
-                <div class="input-group-text">Até</div>
-                <%= date_field_tag :to_date, @filters.to_date, class: "form-control" %>
-              </div>
+              <% periods = { 'Últimos 30 dias': '2022-07-23', 'Últimos 7 dias': '2022-08-16', 'Ontem': '2022-08-22', 'Hoje': '2022-08-23' } %>
+              <%= select_tag :current_period, options_for_select(periods, @filters.current_period), { prompt: "-- Selecione um Periodo --", class: 'form-control chosen-select' } %>
             </div>
             <div class="col-3">
               <div class="mb-3">

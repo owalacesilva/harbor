@@ -19,16 +19,8 @@
         <%= form_tag backoffice_transactions_path, method: :get do -%>
           <div class="row">
             <div class="col-3">
-              <div class="input-group">
-                <div class="input-group-text">De</div>
-                <%= date_field_tag :from_date, @filters.from_date, class: "form-control" %>
-              </div>
-            </div>
-            <div class="col-3">
-              <div class="input-group">
-                <div class="input-group-text">Até</div>
-                <%= date_field_tag :to_date, @filters.to_date, class: "form-control" %>
-              </div>
+              <% periods = { 'Últimos 30 dias': '2022-07-23', 'Últimos 7 dias': '2022-08-16', 'Ontem': '2022-08-22', 'Hoje': '2022-08-23' } %>
+              <%= select_tag :current_period, options_for_select(periods, @filters.current_period), { prompt: "-- Selecione um Periodo --", class: 'form-control chosen-select' } %>
             </div>
             <div class="col-3">
               <div class="mb-3">
@@ -42,16 +34,10 @@
               </div>
             </div>
             <div class="col-3">
-              <div class="input-group">
-                <div class="input-group-text">Valor maior</div>
-                <%= text_field_tag :value_greater_than, @filters.value_greater_than, class: "form-control" %>
-              </div>
+              <%= text_field_tag :point_amount, @filters.point_amount, class: "form-control", placeholder: "Qtd. Tokens" %>
             </div>
             <div class="col-3">
-              <div class="input-group">
-                <div class="input-group-text">Valor menor</div>
-                <%= text_field_tag :value_less_than, @filters.value_less_than, class: "form-control" %>
-              </div>
+              <%= text_field_tag :amount, @filters.amount, class: "form-control", placeholder: "Valor Pago" %>
             </div>
           </div>
           <div class="row g-1 justify-content-end">
@@ -75,7 +61,7 @@
             <th scope="col">Código</th>
             <th scope="col">Operação</th>
             <th scope="col">Tokens</th>
-            <th scope="col">Valor</th>
+            <th scope="col">Valor Pago</th>
           </tr>
         </thead>
         <tbody>
