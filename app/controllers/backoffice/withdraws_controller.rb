@@ -3,7 +3,8 @@ class Backoffice::WithdrawsController < ApplicationController
 
   def index
     @filters = define_filters('withdraws')
-    @withdraws = WithdrawsQuery.call(relation: current_user, filters: @filters)
+    query = WithdrawsQuery.call(relation: current_user, filters: @filters)
+    @withdraws = query.page(params[:page]).per(params[:limit])
   end
 
   def show

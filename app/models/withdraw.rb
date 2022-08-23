@@ -5,4 +5,6 @@ class Withdraw < ApplicationRecord
 
   belongs_to :user, optional: false
   belongs_to :wallet, optional: false
+
+  paginates_per 10
 end
