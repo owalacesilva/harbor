@@ -113,10 +113,10 @@
           <% else -%>
             <% @withdraws.each do |item| -%>
               <tr>
-                <td><%= item.created_at %></td>
+                <td><%= item.joined_at %></td>
                 <td><%= item.id %></td>
                 <td><%= item.id %></td>
-                <td><%= item.balance %></td>
+                <td><%= item.balance_formatted %></td>
                 <td>
                   <% if item.approved %>
                     <label class="badge rounded-pill bg-success">Aprovado</label>
