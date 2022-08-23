@@ -71,7 +71,6 @@
       <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <th scope="col">ID</th>
             <th scope="col">Data</th>
             <th scope="col">Código</th>
             <th scope="col">Operação</th>
@@ -82,7 +81,7 @@
         <tbody>
           <% if @transactions.empty? -%>
             <tr>
-              <td colspan="5">
+              <td colspan="4">
                 <div class="d-flex justify-content-center">
                   <span>Nenhuma movimentação encontrada</span>
                 </div>
@@ -91,9 +90,8 @@
           <% else -%>
             <% @transactions.each do |item| -%>
               <tr>
-                <td scope="row"><%= item.id %></td>
-                <td><%= item.created_at %></td>
-                <td><%= item.code %></td>
+                <td><%= item.joined_at %></td>
+                <td><%= item.code_formatted %></td>
                 <td>
                   <% if item.operation == 'income' %>
                     <label class="badge rounded-pill bg-success">Entrada</label>
@@ -101,8 +99,8 @@
                     <label class="badge rounded-pill bg-danger">Saida</label>
                   <%- end %>
                 </td>
-                <td><%= item.point_amount %> BTC</td>
-                <td>R$ <%= item.amount %></td>
+                <td><%= item.point_amount_formatted %></td>
+                <td><%= item.amount_formatted %></td>
                 <td>
                   <div class="d-flex justify-content-center">
                     <%= link_to "Visualizar", backoffice_transaction_path(item.id), type: "button", class: "btn btn-primary btn-sm" -%>

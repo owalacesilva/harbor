@@ -1,10 +1,14 @@
+# This class is responsible for ...
+
 class Backoffice::TransactionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
     @filters = define_filters('transactions')
     query = TransactionsQuery.call(relation: current_user, filters: @filters)
-    @transactions = query.page(params[:page]).per(params[:limit])
+    @transactions = query.page(params[:page])
+      .per(params[:limit])
+      .decorate
   end
 
   def show
