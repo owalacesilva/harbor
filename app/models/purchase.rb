@@ -20,4 +20,6 @@ class Purchase < ApplicationRecord
   validates :status, presence: true
   validates :status, inclusion: statuses.keys
   validates :code, uniqueness: true
+
+  paginates_per 10
 end
