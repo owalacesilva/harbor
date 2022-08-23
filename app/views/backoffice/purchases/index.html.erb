@@ -91,8 +91,8 @@
           <% else -%>
             <% @purchases.each do |item| -%>
               <tr>
-                <td scope="row"><%= item.code.upcase %></td>
-                <td><%= item.created_at %></td>
+                <td scope="row"><%= item.code_formatted %></td>
+                <td><%= item.joined_at %></td>
                 <td>
                   <% if item.status == 'pending' %>
                     <label class="badge rounded-pill bg-warning">Pendente</label>
@@ -100,8 +100,8 @@
                     <label class="badge rounded-pill bg-success">Pago</label>
                   <%- end %>
                 </td>
-                <td><%= item.amount %> BTC</td>
-                <td>R$ <%= item.total %></td>
+                <td><%= item.amount_formatted %></td>
+                <td><%= item.total_formatted %></td>
                 <td>
                   <div class="d-flex justify-content-center">
                     <%= link_to "Abrir", backoffice_purchase_path(item.id), type: "button", class: "btn btn-primary btn-sm" -%>
