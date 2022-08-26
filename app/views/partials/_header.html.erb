@@ -5,17 +5,62 @@
     </a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ms-auto">
-        <li class="nav-item dropdown">
+        <div class="dropdown notifications">
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Notificações">
+            <%= fa_icon "bell fw lg" %>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end notifications-dropdown shadow">
+            <div class="notifications-dropdown notification-area">
+              <a href="#" class="item dropdown-item text-center no-notification">
+                <span class="d-inline-block">Não há notificações</span>
+              </a>
+            </div>
+            <div class="justify-content-around border-top py-2 see-all-notifications d-none">
+              <a href="/notificacoes/lista" class="d-block btn btn-link text-dark"><strong>Ver todas</strong></a>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkIdiomas" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Alterar idioma">
+            <%= fa_icon "globe fw lg" %>
+            <span class="d-none d-md-inline">Português</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdownMenuLinkIdiomas">
+            <a class="dropdown-item  active" href="https://escritorio.chancellercosmeticos.com.br/linguagem/alterar/pt_BR/backoffice">Português</a>
+            <a class="dropdown-item " href="https://escritorio.chancellercosmeticos.com.br/linguagem/alterar/en_US/backoffice">English</a>
+          </div>
+        </div>
+        <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <span class="me-1"><%= current_user.full_name %></span>
             <%= image_tag 'avatar.jpg', alt: "Avatar profile", class: "img-fluid", style: "max-height: 30px" %>
           </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li><%= link_to "Minha Conta", backoffice_profile_path, class: "dropdown-item" %></li>
-            <li><%= link_to "Senha de Acesso", backoffice_account_password_path, class: "dropdown-item" %></li>
-            <li><%= link_to "Sair", destroy_session_path(:user), method: :delete, class: "dropdown-item" %></li>
-          </ul>
-        </li>
+          <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdownMenuLink">
+            <span class="dropdown-item">Olá, <%= current_user.full_name %></span>
+            <div class="dropdown-divider d-md-none"></div>
+            <%= link_to backoffice_profile_path, class: "dropdown-item" do %>
+              <span><%= fa_icon "user fw" %> Dados Pessoais</span>
+            <%- end %>
+            <%= link_to backoffice_documents_path, class: "dropdown-item" do %>
+              <span><%= fa_icon "user fw" %> Meus Documentos</span>
+            <%- end %>
+            <%= link_to backoffice_banking_account_path, class: "dropdown-item" do %>
+              <span><%= fa_icon "university fw" %> Conta Bancária</span>
+            <%- end %>
+            <a class="dropdown-item" href="/profile/terms"><%= fa_icon "book fw" %> Termos</a>
+            <div class="dropdown-divider"></div>
+            <%= link_to backoffice_address_path, class: "dropdown-item" do %>
+              <span><%= fa_icon "home fw" %> Meu Endereço</span>
+            <%- end %>
+            <%= link_to backoffice_account_password_path, class: "dropdown-item" do %>
+              <span><%= fa_icon "key fw" %> Alterar Senha</span>
+            <%- end %>
+            <div class="dropdown-divider"></div>
+            <%= link_to destroy_session_path(:user), class: "dropdown-item" do%>
+              <%= fa_icon "sign-out fw" %> <span>Sair</span>
+            <%- end%>
+          </div>
+        </div>
       </div>
     </div>
   </div>
