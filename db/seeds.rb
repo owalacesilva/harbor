@@ -5,48 +5,58 @@ Role.create!(unique_name: :employee, display_name: "Funcionário")
 ref_token = Reference.create!(unique_name: :token, display_name: "TOKEN", unit_price: 1.0)
 
 unless Rails.env.production? || Rails.env.test?
-  user_attrs = FactoryBot.attributes_for(:user, email: 'user@email.com', password: '123456')
-  user = User.new(user_attrs)
-  user.save!
+  root_attrs = FactoryBot.attributes_for(:user, email: 'user@email.com', password: '123456')
+  root = User.new(root_attrs)
+  root.save!
 
   profile_attrs = FactoryBot.attributes_for(:profile)
-  profile = user.build_profile(profile_attrs)
+  profile = root.build_profile(profile_attrs)
   profile.save!
 
   10.times do
     amount = rand(10..150)
     balance = rand(10..100)
 
-    purchase = Purchase.new(user_id: user.id, amount: amount, total: amount * ref_token.unit_price,
+    purchase = Purchase.new(user: root, amount: amount, total: amount * ref_token.unit_price,
                             reference: ref_token, status: 'pending')
     purchase.save!
 
-    Transaction.create!({ purchase: purchase, user: user,
-                          origin_wallet: user.wallet, target_wallet: user.wallet,
+    Transaction.create!({ purchase: purchase, user: root,
+                          origin_wallet: root.wallet, target_wallet: root.wallet,
                           reference: ref_token, operation: Transaction.operations[:income],
                           amount: amount, point_amount: amount })
 
-    user.wallet.update!(
-      balance: user.wallet.balance + amount,
-      incomes: user.wallet.incomes + amount,
+    root.wallet.update!(
+      balance: root.wallet.balance + amount,
+      incomes: root.wallet.incomes + amount,
     )
 
-    Withdraw.create!({ user: user, wallet: user.wallet, balance: balance })
+    Withdraw.create!({ user: root, wallet: root.wallet, balance: balance })
   end
 
   3.times do
     amount = rand(10..150)
 
-    withdraw = Withdraw.create!({ user: user, wallet: user.wallet, balance: amount, approved: true })
+    withdraw = Withdraw.create!({ user: root, wallet: root.wallet, balance: amount, approved: true })
 
-    Transaction.create!({ withdraw: withdraw, user: user,
-                          origin_wallet: user.wallet, target_wallet: user.wallet,
+    Transaction.create!({ withdraw: withdraw, user: root,
+                          origin_wallet: root.wallet, target_wallet: root.wallet,
                           reference: ref_token, operation: Transaction.operations[:expense],
                           amount: amount, point_amount: amount })
 
-    user.wallet.update!(
-      balance: user.wallet.balance - amount,
-      incomes: user.wallet.expenses + amount,
+    root.wallet.update!(
+      balance: root.wallet.balance - amount,
+      incomes: root.wallet.expenses + amount,
     )
+  end
+
+  10.times do
+    user_attrs = FactoryBot.attributes_for(:user, sponsor: root)
+    user = User.new(user_attrs)
+    user.save!
+
+    p_attrs = FactoryBot.attributes_for(:profile)
+    p = user.build_profile(p_attrs)
+    p.save!
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
+ActiveRecord::Schema[7.1].define(version: 2022_08_26_031554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -86,6 +86,28 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
     t.index ["user_id"], name: "index_banking_accounts_on_user_id"
   end
 
+  create_table "document_types", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "unique_name", limit: 45, null: false
+    t.string "display_name", limit: 45, null: false
+    t.string "description", limit: 255
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "document_type_id", null: false
+    t.boolean "blocked", default: false, null: false
+    t.date "blocked_at"
+    t.boolean "approved", default: false, null: false
+    t.date "approved_at"
+    t.jsonb "image_data"
+    t.index ["document_type_id"], name: "index_documents_on_document_type_id"
+    t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -154,6 +176,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "sponsor_id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -174,6 +197,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["sponsor_id"], name: "index_users_on_sponsor_id"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
@@ -206,16 +230,19 @@ ActiveRecord::Schema[7.1].define(version: 2022_06_06_021935) do
   add_foreign_key "accounts", "roles", on_update: :cascade, on_delete: :cascade
   add_foreign_key "addresses", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "banking_accounts", "users", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "documents", "document_types", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "documents", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "profiles", "users", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "purchases", "\"references\"", column: "reference_id", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "purchases", "\"references\"", on_update: :cascade, on_delete: :restrict
   add_foreign_key "purchases", "users", on_update: :cascade, on_delete: :restrict
-  add_foreign_key "transactions", "\"references\"", column: "reference_id", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "transactions", "\"references\"", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "purchases", on_update: :cascade, on_delete: :cascade
   add_foreign_key "transactions", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "wallets", column: "origin_wallet_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "wallets", column: "target_wallet_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "withdraws", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "wallets", "\"references\"", column: "reference_id", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "users", "users", column: "sponsor_id", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "wallets", "\"references\"", on_update: :cascade, on_delete: :restrict
   add_foreign_key "wallets", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "withdraws", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "withdraws", "wallets", on_update: :cascade, on_delete: :cascade

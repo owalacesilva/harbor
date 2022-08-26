@@ -11,9 +11,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  belongs_to :sponsor, class_name: 'User', optional: true
   has_one :wallet, autosave: true, dependent: :destroy
   has_one :address, dependent: :destroy
   has_one :banking_account, dependent: :destroy
+  has_many :sponsored, class_name: 'User', foreign_key: 'sponsor_id', dependent: :nullify
   has_many :documents, dependent: :destroy
   has_many :withdraws, dependent: :destroy
   has_many :purchases, dependent: :destroy

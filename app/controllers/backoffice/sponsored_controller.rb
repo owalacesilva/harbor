@@ -5,7 +5,8 @@ class Backoffice::SponsoredController < ApplicationController
 
   def index
     @filters = define_filters('sponsored')
-    @sponsored = User.order(id: :desc).page(params[:page])
+    query = SponsoredQuery.call(relation: current_user, filters: @filters)
+    @sponsored = query.page(params[:page])
       .per(params[:limit])
   end
 end
