@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   include Profilable
+  include Addressable
 
   attr_accessor :email_confirmation, :security_password_confirmation
 
@@ -11,16 +12,18 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :wallet, autosave: true, dependent: :destroy
-  has_many :addresses, dependent: :destroy
+  has_one :address, dependent: :destroy
   has_many :banking_accounts, dependent: :destroy
   has_many :withdraws, dependent: :destroy
   has_many :purchases, dependent: :destroy
   has_many :transactions, dependent: :destroy
-
+  
   validates :email, presence: true
   validates :email, confirmation: true
-
+  
   before_create :create_user_wallet
+  
+  accepts_nested_attributes_for :address
 
   private
 

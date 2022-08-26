@@ -1,0 +1,49 @@
+<%= render "partials/profile" do %>
+  <div class="card">
+    <div class="card-header">
+      Meu Endereço
+    </div>
+    <div class="card-body">
+      <%= form_for @user, as: :user, url: backoffice_update_address_path, method: :post, html: { class: "row g-3" } do |f| %>
+        <% flash.each do |type, msg| %>
+          <div class="alert alert-info">
+            <%= msg %>
+          </div>
+        <% end %>
+        <%= f.fields_for :address_attributes, @user.address do |p| %>
+          <div class="col-md-6">
+            <%= p.label :postal_code, class: "form-label" %><br />
+            <%= p.text_field :postal_code, class: "form-control", autocomplete: "postal_code", required: true %>
+          </div>
+          <div class="col-md-9">
+            <%= p.label :street_address, class: "form-label" %><br />
+            <%= p.text_field :street_address, class: "form-control", autocomplete: "street_address" %>
+          </div>
+          <div class="col-md-3">
+            <%= p.label :building_number, class: "form-label" %><br />
+            <%= p.text_field :building_number, class: "form-control", autocomplete: "building_number" %>
+          </div>
+          <div class="col-md-5">
+            <%= p.label :neighborhood, class: "form-label" %><br />
+            <%= p.text_field :neighborhood, class: "form-control", autocomplete: "neighborhood", required: true %>
+          </div>
+          <div class="col-md-5">
+            <%= p.label :city, class: "form-label" %><br />
+            <%= p.text_field :city, class: "form-control", autocomplete: "city", required: true %>
+          </div>
+          <div class="col-md-2">
+            <%= p.label :state_abbr, class: "form-label" %><br />
+            <%= p.text_field :state_abbr, class: "form-control", autocomplete: "state_abbr", required: true %>
+          </div>
+          <div class="col-md-12">
+            <%= p.label :recipient, class: "form-label" %><br />
+            <%= p.text_field :recipient, class: "form-control", autocomplete: "recipient", required: true %>
+          </div>
+        <%- end %>
+        <div class="col-12">
+          <%= f.submit "Atualizar", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<%- end %>

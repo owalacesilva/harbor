@@ -1,7 +1,9 @@
-<div class="container py-3 mb-3">
+<%= render "partials/profile" do %>
   <div class="card">
+    <div class="card-header">
+      Dados Pessoais
+    </div>
     <div class="card-body">
-      <h5 class="card-title">Meus dados</h5>
       <%= form_for @user, as: :user, url: backoffice_update_profile_path, method: :post, html: { class: "row g-3" } do |f| %>
         <% flash.each do |type, msg| %>
           <div class="alert alert-info">
@@ -41,4 +43,4 @@
       <% end %>
     </div>
   </div>
-</div>
+<%- end %>

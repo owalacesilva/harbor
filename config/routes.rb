@@ -28,6 +28,9 @@ Rails.application.routes.draw do
     get 'account/password', controller: :password, action: :index, as: :account_password
     post 'account/password', controller: :password, action: :update, as: :update_account_password
 
+    get 'address', controller: :address, action: :index, as: :address
+    post 'address', controller: :address, action: :update, as: :update_address
+
     resources :purchases
     resources :transactions, only: [:index, :show]
     resources :withdraws, only: [:index, :show, :create, :cancel] do

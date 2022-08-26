@@ -13,8 +13,8 @@ RSpec.describe User, type: :model do
     subject { build(:user) }
 
     it { is_expected.to have_one(:profile).dependent(:destroy) }
+    it { is_expected.to have_one(:address).dependent(:destroy) }
     it { is_expected.to have_one(:wallet).dependent(:destroy) }
-    it { is_expected.to have_many(:addresses).dependent(:destroy) }
     it { is_expected.to have_many(:banking_accounts).dependent(:destroy) }
     it { is_expected.to have_many(:withdraws).dependent(:destroy) }
   end
