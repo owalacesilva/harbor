@@ -22,6 +22,8 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :email, confirmation: true
 
+  paginates_per 10
+
   before_create :create_user_wallet
 
   accepts_nested_attributes_for :address, :banking_account, :documents
