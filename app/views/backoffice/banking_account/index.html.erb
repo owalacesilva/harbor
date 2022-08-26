@@ -1,0 +1,45 @@
+<%= render "partials/profile" do %>
+  <div class="card">
+    <div class="card-header">
+      Dados Bancários
+    </div>
+    <div class="card-body">
+      <%= form_for @user, as: :user, url: backoffice_update_banking_account_path, method: :post, html: { class: "row g-3" } do |f| %>
+        <% flash.each do |type, msg| %>
+          <div class="alert alert-info">
+            <%= msg %>
+          </div>
+        <% end %>
+        <%= f.fields_for :banking_account_attributes, @user.banking_account do |p| %>
+          <div class="col-md-6">
+            <%= p.label :bank_code, class: "form-label" %><br />
+            <%= p.text_field :bank_code, class: "form-control", autocomplete: "bank_code", required: true %>
+          </div>
+          <div class="col-md-6">
+            <%= p.label :document_number, class: "form-label" %><br />
+            <%= p.text_field :document_number, class: "form-control", autocomplete: "document_number", required: true %>
+          </div>
+          <div class="col-md-4">
+            <%= p.label :branch_number, class: "form-label" %><br />
+            <%= p.text_field :branch_number, class: "form-control", autocomplete: "branch_number" %>
+          </div>
+          <div class="col-md-2">
+            <%= p.label :branch_code, class: "form-label" %><br />
+            <%= p.text_field :branch_code, class: "form-control", autocomplete: "branch_code", required: true %>
+          </div>
+          <div class="col-md-4">
+            <%= p.label :account_number, class: "form-label" %><br />
+            <%= p.text_field :account_number, class: "form-control", autocomplete: "account_number", required: true %>
+          </div>
+          <div class="col-md-2">
+            <%= p.label :account_code, class: "form-label" %><br />
+            <%= p.text_field :account_code, class: "form-control", autocomplete: "account_code", required: true %>
+          </div>
+        <%- end %>
+        <div class="col-12">
+          <%= f.submit "Atualizar", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<%- end %>

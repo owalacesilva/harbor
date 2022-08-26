@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_one(:profile).dependent(:destroy) }
     it { is_expected.to have_one(:address).dependent(:destroy) }
     it { is_expected.to have_one(:wallet).dependent(:destroy) }
-    it { is_expected.to have_many(:banking_accounts).dependent(:destroy) }
+    it { is_expected.to have_one(:banking_account).dependent(:destroy) }
     it { is_expected.to have_many(:withdraws).dependent(:destroy) }
   end
 

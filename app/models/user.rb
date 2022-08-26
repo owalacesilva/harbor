@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   has_one :wallet, autosave: true, dependent: :destroy
   has_one :address, dependent: :destroy
-  has_many :banking_accounts, dependent: :destroy
+  has_one :banking_account, dependent: :destroy
   has_many :withdraws, dependent: :destroy
   has_many :purchases, dependent: :destroy
   has_many :transactions, dependent: :destroy
@@ -24,6 +24,7 @@ class User < ApplicationRecord
   before_create :create_user_wallet
   
   accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :banking_account
 
   private
 

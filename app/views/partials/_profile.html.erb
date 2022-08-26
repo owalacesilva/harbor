@@ -10,10 +10,13 @@
             <%= link_to backoffice_address_path, class: "list-group-item #{active_class_multiple([backoffice_address_path])}" do %>
               <%= fa_icon "home lg" %><span>&nbsp;</span>Meu Endereço
             <%- end %>
+            <%= link_to backoffice_banking_account_path, class: "list-group-item #{active_class_multiple([backoffice_banking_account_path])}" do %>
+              <%= fa_icon "home lg" %><span>&nbsp;</span>Dados Bancários
+            <%- end %>
             <%= link_to backoffice_profile_path, class: "list-group-item #{active_class_multiple([backoffice_profile_path])}" do %>
               <%= fa_icon "home lg" %><span>&nbsp;</span>Meus Documentos
             <%- end %>
-            <%= link_to backoffice_profile_path, class: "list-group-item #{active_class_multiple([backoffice_profile_path])}" do %>
+            <%= link_to backoffice_account_password_path, class: "list-group-item #{active_class_multiple([backoffice_account_password_path])}" do %>
               <%= fa_icon "home lg" %><span>&nbsp;</span>Alterar Senha
             <%- end %>
           </ul>

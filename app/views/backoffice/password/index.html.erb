@@ -1,7 +1,9 @@
-<div class="container py-3 mb-3">
+<%= render "partials/profile" do %>
   <div class="card">
+    <div class="card-header">
+      Alterar Senha
+    </div>
     <div class="card-body">
-      <h5 class="card-title">Senha de Acesso</h5>
       <%= form_for @user, as: :user, url: backoffice_update_account_password_path, method: :post, html: { class: "row g-3" } do |f| %>
         <% flash.each do |type, msg| %>
           <div class="alert alert-info">
@@ -27,4 +29,4 @@
       <% end %>
     </div>
   </div>
-</div>
+<%- end %>
