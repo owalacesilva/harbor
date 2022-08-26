@@ -73,6 +73,11 @@
       <%- end %>
     </li>
     <li class="nav-item">
+      <%= link_to backoffice_sponsored_index_path, class: "nav-link #{active_class_multiple([backoffice_sponsored_index_path])}" do %>
+        <%= fa_icon "user lg" %><span>&nbsp;</span>Meus Indicados
+      <%- end %>
+    </li>
+    <li class="nav-item">
       <%= link_to backoffice_purchases_path, class: "nav-link #{active_class_multiple([backoffice_purchases_path, new_backoffice_purchase_path])}" do %>
         <%= fa_icon "shopping-cart lg" %><span>&nbsp;</span>Pedidos de Compra
       <%- end %>

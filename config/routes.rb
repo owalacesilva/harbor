@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
     resources :purchases
     resources :transactions, only: [:index, :show]
+    resources :sponsored, only: [:index]
     resources :withdraws, only: [:index, :show, :create, :cancel] do
       post 'cancel', on: :member
     end

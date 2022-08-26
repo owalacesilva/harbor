@@ -9,6 +9,7 @@ module Profilable
     # @see https://coderwall.com/p/wamyow/using-delegate-in-rails
     delegate :first_name, to: :profile, prefix: true
     delegate :last_name, to: :profile, prefix: true
+    delegate :phone_number, to: :profile, prefix: false
 
     accepts_nested_attributes_for :profile
   end
