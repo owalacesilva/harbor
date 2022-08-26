@@ -1,6 +1,6 @@
 # This class is responsible for ...
 
-class WithdrawDecorator < Draper::Decorator
+class UserDecorator < Draper::Decorator
   delegate_all
 
   def self.collection_decorator_class
@@ -9,10 +9,5 @@ class WithdrawDecorator < Draper::Decorator
 
   def joined_at
     object.created_at.strftime("%d/%m/%Y")
-  end
-
-  def balance_formatted
-    h.number_to_currency(object.balance, unit: "R$\s",
-      separator: ',', delimiter: '', raise: true)
   end
 end

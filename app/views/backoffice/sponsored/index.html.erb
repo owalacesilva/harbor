@@ -59,7 +59,7 @@
           <% else -%>
             <% @sponsored.each do |user| -%>
               <tr>
-                <td><%= user.created_at %></td>
+                <td><%= user.joined_at %></td>
                 <td><%= user.full_name %></td>
                 <td><%= user.phone_number %></td>
                 <td>

@@ -8,5 +8,6 @@ class Backoffice::SponsoredController < ApplicationController
     query = SponsoredQuery.call(relation: current_user, filters: @filters)
     @sponsored = query.page(params[:page])
       .per(params[:limit])
+      .decorate
   end
 end
