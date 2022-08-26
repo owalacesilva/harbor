@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CreateRoles < ActiveRecord::Migration[7.1]
+class CreateDocumentTypes < ActiveRecord::Migration[7.1]
   def up
-    create_table :roles do |t|
+    create_table :document_types do |t|
       t.timestamps null: false
 
       t.string :unique_name, null: false, limit: 45, unique: true
@@ -12,6 +12,6 @@ class CreateRoles < ActiveRecord::Migration[7.1]
   end
 
   def down
-    drop_table :roles
+    drop_table :document_types
   end
 end

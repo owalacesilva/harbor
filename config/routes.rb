@@ -34,6 +34,9 @@ Rails.application.routes.draw do
     get 'banking_account', controller: :banking_account, action: :index, as: :banking_account
     post 'banking_account', controller: :banking_account, action: :update, as: :update_banking_account
 
+    get 'documents', controller: :documents, action: :index, as: :documents
+    post 'documents', controller: :documents, action: :update, as: :update_documents
+
     resources :purchases
     resources :transactions, only: [:index, :show]
     resources :withdraws, only: [:index, :show, :create, :cancel] do
