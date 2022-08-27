@@ -1,0 +1,26 @@
+<div class="dropdown dropdown-notifications">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Notificações">
+    <%= fa_icon "bell fw lg" %>
+  </a>
+  <div class="dropdown-menu dropdown-menu-end notifications-dropdown shadow">
+    <div class="notifications-dropdown notification-area">
+      <% if notifications.empty? %>
+        <a href="#" class="item dropdown-item text-center no-notification">
+          <span class="d-inline-block">Não há notificações</span>
+        </a>
+      <%- else %>
+        <% notifications.each do |n| %>
+          <%= link_to root_path, class: "item dropdown-item" do %>
+            <div><%= n.title %></div>
+            <small class="text-muted"><%= n.created_at %></small>
+          <%- end %>
+        <%- end %>
+        <div class="justify-content-center border-top see-all-notifications">
+          <%= link_to root_path, class: "d-block btn btn-link" do %>
+            <span>Ver todas</span>
+          <%- end %>
+        </div>
+      <%- end %>
+    </div>
+  </div>
+</div>

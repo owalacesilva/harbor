@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :withdraws, dependent: :destroy
   has_many :purchases, dependent: :destroy
   has_many :transactions, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   validates :email, presence: true
   validates :email, confirmation: true

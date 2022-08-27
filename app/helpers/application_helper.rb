@@ -17,4 +17,8 @@ module ApplicationHelper
   def human_attribute_enum(model_name, enum_attr, attr_name)
     Hash[enum_attr.map { |k,v| [I18n.t("activerecord.attributes.#{model_name}/#{attr_name}.#{k}"), k] }]
   end
+
+  def notifications
+    current_user.notifications
+  end
 end

@@ -59,4 +59,8 @@ unless Rails.env.production? || Rails.env.test?
     p = user.build_profile(p_attrs)
     p.save!
   end
+
+  5.times do
+    Notification.create!(FactoryBot.attributes_for(:notification, user: root))
+  end
 end

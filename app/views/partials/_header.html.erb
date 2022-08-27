@@ -1,38 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-dark py-4" style="background-color: #2E294E">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2E294E">
   <div class="container">
     <a class="navbar-brand" href="#">
       <%= image_tag 'logo360.png', alt: "Logo Company", height: '24', class: 'd-inline-block align-text-top' %>
     </a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ms-auto">
-        <div class="dropdown notifications">
-          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Notificações">
-            <%= fa_icon "bell fw lg" %>
-          </a>
-          <div class="dropdown-menu dropdown-menu-end notifications-dropdown shadow">
-            <div class="notifications-dropdown notification-area">
-              <a href="#" class="item dropdown-item text-center no-notification">
-                <span class="d-inline-block">Não há notificações</span>
-              </a>
-            </div>
-            <div class="justify-content-around border-top py-2 see-all-notifications d-none">
-              <a href="/notificacoes/lista" class="d-block btn btn-link text-dark"><strong>Ver todas</strong></a>
-            </div>
-          </div>
-        </div>
-        <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkIdiomas" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Alterar idioma">
-            <%= fa_icon "globe fw lg" %>
-            <span class="d-none d-md-inline">Português</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdownMenuLinkIdiomas">
-            <a class="dropdown-item  active" href="https://escritorio.chancellercosmeticos.com.br/linguagem/alterar/pt_BR/backoffice">Português</a>
-            <a class="dropdown-item " href="https://escritorio.chancellercosmeticos.com.br/linguagem/alterar/en_US/backoffice">English</a>
-          </div>
-        </div>
+        <!-- Notifications -->
+        <%= render 'partials/notifications' %>
+        <!-- Language -->
+        <%= render 'partials/language' %>
+        <!-- Menu -->
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="me-1"><%= current_user.full_name %></span>
             <%= image_tag 'avatar.jpg', alt: "Avatar profile", class: "img-fluid", style: "max-height: 30px" %>
           </a>
           <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdownMenuLink">
@@ -54,6 +33,9 @@
             <%- end %>
             <%= link_to backoffice_account_password_path, class: "dropdown-item" do %>
               <span><%= fa_icon "key fw" %> Alterar Senha</span>
+            <%- end %>
+            <%= link_to backoffice_account_password_path, class: "dropdown-item" do %>
+              <span><%= fa_icon "key fw" %> Assinatura Eletrônica</span>
             <%- end %>
             <div class="dropdown-divider"></div>
             <%= link_to destroy_session_path(:user), class: "dropdown-item" do%>
@@ -79,17 +61,17 @@
     </li>
     <li class="nav-item">
       <%= link_to backoffice_purchases_path, class: "nav-link #{active_class_multiple([backoffice_purchases_path, new_backoffice_purchase_path])}" do %>
-        <%= fa_icon "shopping-cart lg" %><span>&nbsp;</span>Pedidos de Compra
+        <%= fa_icon "shopping-cart lg" %><span>&nbsp;</span>Meus Investimentos
       <%- end %>
     </li>
     <li class="nav-item">
       <%= link_to backoffice_withdraws_path, class: "nav-link #{active_class_multiple([backoffice_withdraws_path])}" do %>
-        <%= fa_icon "usd lg" %><span>&nbsp;</span>Solicitações de Saques
+        <%= fa_icon "usd lg" %><span>&nbsp;</span>Saques
       <%- end %>
     </li>
     <li class="nav-item">
       <%= link_to backoffice_transactions_path, class: "nav-link #{active_class_multiple([backoffice_transactions_path])}" do %>
-        <%= fa_icon "line-chart lg" %><span>&nbsp;</span>Movimentações
+        <%= fa_icon "line-chart lg" %><span>&nbsp;</span> Extrato Financeiro
       <%- end %>
     </li>
     <li class="nav-item">

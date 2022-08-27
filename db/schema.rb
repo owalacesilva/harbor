@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_08_26_031554) do
+ActiveRecord::Schema[7.1].define(version: 2022_08_27_151049) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -106,6 +106,19 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_26_031554) do
     t.jsonb "image_data"
     t.index ["document_type_id"], name: "index_documents_on_document_type_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.boolean "broadcast", default: false, null: false
+    t.boolean "published", default: false, null: false
+    t.boolean "opened", default: false, null: false
+    t.string "title", null: false
+    t.text "message", null: false
+    t.string "url"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -232,6 +245,7 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_26_031554) do
   add_foreign_key "banking_accounts", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "documents", "document_types", on_update: :cascade, on_delete: :restrict
   add_foreign_key "documents", "users", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "notifications", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "profiles", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "purchases", "\"references\"", on_update: :cascade, on_delete: :restrict
   add_foreign_key "purchases", "users", on_update: :cascade, on_delete: :restrict
