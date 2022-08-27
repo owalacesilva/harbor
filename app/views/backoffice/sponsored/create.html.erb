@@ -1,2 +1,25 @@
-<h1>Backoffice::Sponsored#create</h1>
-<p>Find me in app/views/backoffice/sponsored/create.html.erb</p>
+<div class="container py-3 mb-3">
+  <div class="row justify-content-center">
+    <div class="col-9 text-center">
+      <h3 class="fw-bold mb-3">Cadastro realizado com sucesso</h3>
+      <p>O novo usuário foi cadastrado com sucesso.</p>
+      <p>Um e-mail de ativação foi enviado para o novo usuário e, após a ativação da sua nova conta, o usuário já estará na sua rede de indicados.</p>
+      <div class="mb-2">
+        <strong>Nome</strong><br />
+        <span><%= current_user.full_name %></span>
+      </div>
+      <div class="mb-2">
+        <strong>E-mail</strong><br />
+        <span><%= current_user.email %></span>
+      </div>
+      <div class="mb-2">
+        <strong>Acesso</strong><br />
+        <span><%= current_user.email %></span>
+      </div>
+      <hr />
+      <%= link_to backoffice_sponsored_index_path, class: "btn btn-link" do %>
+        <%= fa_icon "arrow-left fw" %><span>&nbsp;</span>Voltar
+      <%- end %>
+    </div>
+  </div>
+</div>

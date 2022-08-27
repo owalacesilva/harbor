@@ -65,7 +65,11 @@
                 <td><%= user.phone_number %></td>
                 <td><%= user.email %></td>
                 <td>
-                  <label class="badge rounded-pill bg-success">Ativo</label>
+                  <% if user.confirmed_at.nil? %>
+                    <label class="badge rounded-pill bg-warning">Pendente</label>
+                  <% else %>
+                    <label class="badge rounded-pill bg-success">Ativo</label>
+                  <%- end %>
                 </td>
               </tr>
             <%- end -%>
