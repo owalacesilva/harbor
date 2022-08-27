@@ -1,0 +1,54 @@
+<div class="container py-3 mb-3">
+  <div class="row justify-content-center">
+    <div class="col-9">
+      <h5 class="fw-bold">Cadastrar amigo</h5>
+      <div class="card">
+        <div class="card-body">
+          <% flash.each do |type, msg| %>
+            <div class="alert alert-danger">
+              <%= msg %>
+            </div>
+          <% end %>
+          <div class="row g-3">
+            <div class="col-md-6 mb-3">
+              <%= label_tag :sponsor, "Patrocinador", class: "form-label" %><br />
+              <%= text_field :sponsor_name, nil, value: current_user.full_name, class: "form-control", readonly: true %>
+            </div>
+          </div>
+          <%= form_for @user, as: :user, url: backoffice_sponsored_index_path, method: :post, html: { class: "row g-3" } do |f| %>
+            <%= f.fields_for :profile_attributes, @user.profile do |p| %>
+              <div class="col-md-6">
+                <%= p.label :first_name, class: "form-label" %><br />
+                <%= p.text_field :first_name, class: "form-control", autocomplete: "first_name", required: true %>
+              </div>
+              <div class="col-md-6">
+                <%= p.label :last_name, class: "form-label" %><small class="mx-1">(Optional)</small><br />
+                <%= p.text_field :last_name, class: "form-control", autocomplete: "last_name" %>
+              </div>
+              <div class="col-md-6">
+                <%= p.label :gender, class: "form-label" %><br />
+                <%= p.radio_button :gender, "male" %> Homem
+                <%= p.radio_button :gender, "female" %> Mulher
+              </div>
+              <div class="col-md-6">
+                <%= p.label :phone_number, class: "form-label" %><br />
+                <%= p.text_field :phone_number, class: "form-control", autocomplete: "phone_number", required: true %>
+              </div>
+            <%- end %>
+            <div class="col-md-6">
+              <%= f.label :email, class: "form-label" %><br />
+              <%= f.email_field :email, class: "form-control", autocomplete: "email", required: true %>
+            </div>
+            <div class="col-md-6">
+              <%= f.label :email_confirmation, class: "form-label" %><br />
+              <%= f.email_field :email_confirmation, class: "form-control", required: true %>
+            </div>
+            <div class="col-12 text-end">
+              <%= f.submit "Cadastrar", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

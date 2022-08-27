@@ -4,7 +4,7 @@
       <h5 class="fw-bold">Meus Indicados</h5>
     </div>
     <div class="col d-flex justify-content-end">
-      <%= link_to "Indicar amigo", "#", class: "btn btn-primary" %>
+      <%= link_to "Indicar amigo", new_backoffice_sponsored_path, class: "btn btn-primary" %>
     </div>
   </div>
   <div class="filter">
@@ -44,6 +44,7 @@
             <th scope="col">Registrado</th>
             <th scope="col">Nome</th>
             <th scope="col">Contato</th>
+            <th scope="col">Email</th>
             <th scope="col">Situação</th>
           </tr>
         </thead>
@@ -62,6 +63,7 @@
                 <td><%= user.joined_at %></td>
                 <td><%= user.full_name %></td>
                 <td><%= user.phone_number %></td>
+                <td><%= user.email %></td>
                 <td>
                   <label class="badge rounded-pill bg-success">Ativo</label>
                 </td>
