@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_08_29_192109) do
+ActiveRecord::Schema[7.1].define(version: 2022_08_30_162540) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -160,6 +160,16 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_29_192109) do
     t.string "description"
     t.index ["reference_id"], name: "index_purchases_on_reference_id"
     t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
+  create_table "qualifications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "unique_name", limit: 45, null: false
+    t.string "display_name", limit: 45, null: false
+    t.string "description", limit: 255
+    t.decimal "volume", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "max_points_by_team", precision: 10, scale: 2, default: "0.0", null: false
   end
 
   create_table "references", force: :cascade do |t|
