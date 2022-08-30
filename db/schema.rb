@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_08_30_172235) do
+ActiveRecord::Schema[7.1].define(version: 2022_08_30_174032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -144,6 +144,22 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_30_172235) do
     t.text "message", null: false
     t.string "url"
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "point_distributions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "done", default: false
+    t.decimal "base_value", precision: 10, scale: 2
+    t.string "params"
+    t.bigint "user_id", null: false
+    t.bigint "reference_id", null: false
+    t.bigint "purchase_id", null: false
+    t.bigint "user_point_record_id", null: false
+    t.index ["purchase_id"], name: "index_point_distributions_on_purchase_id"
+    t.index ["reference_id"], name: "index_point_distributions_on_reference_id"
+    t.index ["user_id"], name: "index_point_distributions_on_user_id"
+    t.index ["user_point_record_id"], name: "index_point_distributions_on_user_point_record_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -339,6 +355,10 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_30_172235) do
   add_foreign_key "nodes", "nodes", column: "sponsor_node_id", on_update: :cascade, on_delete: :nullify
   add_foreign_key "nodes", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "notifications", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "point_distributions", "\"references\"", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "point_distributions", "purchases", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "point_distributions", "user_point_records", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "point_distributions", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "profiles", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "purchases", "\"references\"", on_update: :cascade, on_delete: :restrict
   add_foreign_key "purchases", "users", on_update: :cascade, on_delete: :restrict
