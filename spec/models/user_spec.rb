@@ -17,6 +17,8 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_one(:address).dependent(:destroy) }
     it { is_expected.to have_one(:wallet).dependent(:destroy) }
     it { is_expected.to have_one(:banking_account).dependent(:destroy) }
+    it { is_expected.to have_one(:queue).class_name('UserQueue').dependent(:destroy) }
+    it { is_expected.to have_one(:node).dependent(:destroy) }
     it { is_expected.to have_many(:sponsored).dependent(:nullify) }
     it { is_expected.to have_many(:documents).dependent(:destroy) }
     it { is_expected.to have_many(:withdraws).dependent(:destroy) }

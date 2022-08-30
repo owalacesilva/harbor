@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_08_27_151049) do
+ActiveRecord::Schema[7.1].define(version: 2022_08_29_192109) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -108,6 +108,21 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_27_151049) do
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
+  create_table "nodes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "sponsor_node_id"
+    t.bigint "parent_node_id"
+    t.integer "lft", null: false
+    t.integer "rgt", null: false
+    t.integer "depth", null: false
+    t.decimal "points", precision: 10, scale: 2, default: "0.0", null: false
+    t.index ["parent_node_id"], name: "index_nodes_on_parent_node_id"
+    t.index ["sponsor_node_id"], name: "index_nodes_on_sponsor_node_id"
+    t.index ["user_id"], name: "index_nodes_on_user_id"
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -186,6 +201,18 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_27_151049) do
     t.index ["withdraw_id"], name: "index_transactions_on_withdraw_id"
   end
 
+  create_table "user_queues", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "user_sponsor_id", null: false
+    t.boolean "done", default: false, null: false
+    t.date "done_at"
+    t.string "side", null: false
+    t.index ["user_id"], name: "index_user_queues_on_user_id"
+    t.index ["user_sponsor_id"], name: "index_user_queues_on_user_sponsor_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -245,6 +272,9 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_27_151049) do
   add_foreign_key "banking_accounts", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "documents", "document_types", on_update: :cascade, on_delete: :restrict
   add_foreign_key "documents", "users", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "nodes", "nodes", column: "parent_node_id", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "nodes", "nodes", column: "sponsor_node_id", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "nodes", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "notifications", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "profiles", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "purchases", "\"references\"", on_update: :cascade, on_delete: :restrict
@@ -255,6 +285,8 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_27_151049) do
   add_foreign_key "transactions", "wallets", column: "origin_wallet_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "wallets", column: "target_wallet_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "withdraws", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user_queues", "users", column: "user_sponsor_id", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "user_queues", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "users", "users", column: "sponsor_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "wallets", "\"references\"", on_update: :cascade, on_delete: :restrict
   add_foreign_key "wallets", "users", on_update: :cascade, on_delete: :restrict

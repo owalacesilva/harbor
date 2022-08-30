@@ -1,0 +1,49 @@
+<div class="container py-3 mb-3">
+  <div class="row mb-4">
+    <div class="col">
+      <h5 class="fw-bold">Minha Rede</h5>
+    </div>
+  </div>
+  <div class="card mt-3">
+    <div class="card-body">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Registrado</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Contato</th>
+            <th scope="col">Email</th>
+            <th scope="col">Situação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @users.empty? -%>
+            <tr>
+              <td colspan="4">
+                <div class="d-flex justify-content-center">
+                  <span>Nenhum indicado encontrado</span>
+                </div>
+              </td>
+            </tr>
+          <% else -%>
+            <% @users.each do |user| -%>
+              <tr>
+                <td><%= user.created_at %></td>
+                <td><%= user.full_name %></td>
+                <td><%= user.phone_number %></td>
+                <td><%= user.email %></td>
+                <td>
+                  <% if user.confirmed_at.nil? %>
+                    <label class="badge rounded-pill bg-warning">Pendente</label>
+                  <% else %>
+                    <label class="badge rounded-pill bg-success">Ativo</label>
+                  <%- end %>
+                </td>
+              </tr>
+            <%- end -%>
+          <% end -%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

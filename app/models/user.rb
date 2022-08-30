@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_one :wallet, autosave: true, dependent: :destroy
   has_one :address, dependent: :destroy
   has_one :banking_account, dependent: :destroy
+  has_one :queue, class_name: 'UserQueue', dependent: :destroy
+  has_one :node, dependent: :destroy
   has_many :sponsored, class_name: 'User', foreign_key: 'sponsor_id', dependent: :nullify
   has_many :documents, dependent: :destroy
   has_many :withdraws, dependent: :destroy
@@ -27,6 +29,7 @@ class User < ApplicationRecord
 
   paginates_per 10
 
+  before_create :add_user_to_queue, if: Proc.new { |user| user.sponsor.present? }
   before_create :create_user_wallet
 
   accepts_nested_attributes_for :address, :banking_account, :documents
@@ -35,5 +38,9 @@ class User < ApplicationRecord
 
   def create_user_wallet
     build_wallet(reference: Reference.token)
+  end
+
+  def add_user_to_queue
+    build_queue(user_sponsor: sponsor, side: UserQueue.sides[:left])
   end
 end
