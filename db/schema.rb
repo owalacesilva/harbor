@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_08_30_162540) do
+ActiveRecord::Schema[7.1].define(version: 2022_08_30_163353) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -106,6 +106,16 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_30_162540) do
     t.jsonb "image_data"
     t.index ["document_type_id"], name: "index_documents_on_document_type_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
+  create_table "graduations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "unique_name", limit: 45, null: false
+    t.string "display_name", limit: 45, null: false
+    t.string "description", limit: 255
+    t.decimal "volume", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "max_points_by_team", precision: 10, scale: 2, default: "0.0", null: false
   end
 
   create_table "nodes", force: :cascade do |t|
