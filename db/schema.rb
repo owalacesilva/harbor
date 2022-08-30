@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_08_30_163910) do
+ActiveRecord::Schema[7.1].define(version: 2022_08_30_172235) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -230,6 +230,31 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_30_163910) do
     t.index ["user_id"], name: "index_user_graduations_on_user_id"
   end
 
+  create_table "user_point_records", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "origin_user_id", null: false
+    t.bigint "reference_id", null: false
+    t.date "record_date"
+    t.decimal "base_value", precision: 10, scale: 2
+    t.decimal "amount", precision: 10, scale: 2
+    t.index ["origin_user_id"], name: "index_user_point_records_on_origin_user_id"
+    t.index ["reference_id"], name: "index_user_point_records_on_reference_id"
+    t.index ["user_id"], name: "index_user_point_records_on_user_id"
+  end
+
+  create_table "user_points", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "reference_id", null: false
+    t.decimal "amount", precision: 10, scale: 2
+    t.index ["reference_id"], name: "index_user_points_on_reference_id"
+    t.index ["user_id", "reference_id"], name: "index_user_points_on_user_id_and_reference_id", unique: true
+    t.index ["user_id"], name: "index_user_points_on_user_id"
+  end
+
   create_table "user_qualifications", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -325,6 +350,11 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_30_163910) do
   add_foreign_key "transactions", "withdraws", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_graduations", "graduations", on_update: :cascade, on_delete: :restrict
   add_foreign_key "user_graduations", "users", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "user_point_records", "\"references\"", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "user_point_records", "users", column: "origin_user_id", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "user_point_records", "users", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "user_points", "\"references\"", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "user_points", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "user_qualifications", "qualifications", on_update: :cascade, on_delete: :restrict
   add_foreign_key "user_qualifications", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "user_queues", "users", column: "user_sponsor_id", on_update: :cascade, on_delete: :restrict
