@@ -9,5 +9,7 @@ class Backoffice::NetworkController < ApplicationController
       .where(node: { lft: @node.lft..@node.rgt })
       .where('node.lft = (node.rgt - 1)')
       .order(created_at: :desc)
+      .page(params[:page])
+      .per(params[:limit])
   end
 end

@@ -11,4 +11,6 @@ class Node < ApplicationRecord
   scope :order_by_right_desc, -> { order(rgt: :desc) }
   scope :right_latest, -> { order_by_right_desc.first }
   scope :nodes_from_target, ->(target) { where("rgt >= :target", target: target) }
+
+  paginates_per 10
 end
