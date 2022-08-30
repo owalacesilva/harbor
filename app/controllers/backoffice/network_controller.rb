@@ -4,11 +4,9 @@ class Backoffice::NetworkController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @node = current_user.node
-    @users = User.joins(:node)
-      .where(node: { lft: @node.lft..@node.rgt })
-      .where('node.lft = (node.rgt - 1)')
-      .order(created_at: :desc)
+    @filters = define_filters('network')
+    query = NetworkQuery.call(relation: current_user, filters: @filters)
+    @users = query.order(created_at: :desc)
       .page(params[:page])
       .per(params[:limit])
   end

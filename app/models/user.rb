@@ -34,6 +34,14 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :address, :banking_account, :documents
 
+  def network
+    return if node.blank?
+
+    User.joins(:node)
+      .where(node: { lft: node.lft..node.rgt })
+      .where('node.lft = (node.rgt - 1)')
+  end
+
   private
 
   def create_user_wallet
