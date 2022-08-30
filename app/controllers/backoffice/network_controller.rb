@@ -9,5 +9,6 @@ class Backoffice::NetworkController < ApplicationController
     @users = query.order(created_at: :desc)
       .page(params[:page])
       .per(params[:limit])
+      .decorate
   end
 end
