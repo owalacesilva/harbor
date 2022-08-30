@@ -9,7 +9,13 @@ RSpec.describe Graduation, type: :model do
     end
   end
 
-  describe ".validations" do
+  describe '.associations' do
+    subject { build(:graduation) }
+
+    it { is_expected.to have_many(:user_graduations).dependent(:destroy) }
+  end
+
+  describe '.validations' do
     subject { build(:graduation) }
 
     it { is_expected.to validate_uniqueness_of(:unique_name) }

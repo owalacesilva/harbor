@@ -21,6 +21,8 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_one(:node).dependent(:destroy) }
     it { is_expected.to have_many(:sponsored).dependent(:nullify) }
     it { is_expected.to have_many(:documents).dependent(:destroy) }
+    it { is_expected.to have_many(:user_qualifications).dependent(:destroy) }
+    it { is_expected.to have_many(:user_graduations).dependent(:destroy) }
     it { is_expected.to have_many(:withdraws).dependent(:destroy) }
     it { is_expected.to have_many(:purchases).dependent(:destroy) }
     it { is_expected.to have_many(:transactions).dependent(:destroy) }

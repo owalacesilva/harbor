@@ -19,6 +19,10 @@ class User < ApplicationRecord
   has_one :node, dependent: :destroy
   has_many :sponsored, class_name: 'User', foreign_key: 'sponsor_id', dependent: :nullify
   has_many :documents, dependent: :destroy
+  has_many :user_qualifications, dependent: :destroy
+  has_many :user_graduations, dependent: :destroy
+  has_many :qualifications, through: :user_qualifications
+  has_many :graduations, through: :user_graduations
   has_many :withdraws, dependent: :destroy
   has_many :purchases, dependent: :destroy
   has_many :transactions, dependent: :destroy

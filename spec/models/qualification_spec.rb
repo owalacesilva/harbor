@@ -9,6 +9,12 @@ RSpec.describe Qualification, type: :model do
     end
   end
 
+  describe '.associations' do
+    subject { build(:qualification) }
+
+    it { is_expected.to have_many(:user_qualifications).dependent(:destroy) }
+  end
+
   describe ".validations" do
     subject { build(:qualification) }
 

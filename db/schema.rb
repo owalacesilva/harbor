@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_08_30_163353) do
+ActiveRecord::Schema[7.1].define(version: 2022_08_30_163910) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -221,6 +221,24 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_30_163353) do
     t.index ["withdraw_id"], name: "index_transactions_on_withdraw_id"
   end
 
+  create_table "user_graduations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "graduation_id", null: false
+    t.index ["graduation_id"], name: "index_user_graduations_on_graduation_id"
+    t.index ["user_id"], name: "index_user_graduations_on_user_id"
+  end
+
+  create_table "user_qualifications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "qualification_id", null: false
+    t.index ["qualification_id"], name: "index_user_qualifications_on_qualification_id"
+    t.index ["user_id"], name: "index_user_qualifications_on_user_id"
+  end
+
   create_table "user_queues", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -305,6 +323,10 @@ ActiveRecord::Schema[7.1].define(version: 2022_08_30_163353) do
   add_foreign_key "transactions", "wallets", column: "origin_wallet_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "wallets", column: "target_wallet_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "transactions", "withdraws", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user_graduations", "graduations", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "user_graduations", "users", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "user_qualifications", "qualifications", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "user_qualifications", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "user_queues", "users", column: "user_sponsor_id", on_update: :cascade, on_delete: :restrict
   add_foreign_key "user_queues", "users", on_update: :cascade, on_delete: :restrict
   add_foreign_key "users", "users", column: "sponsor_id", on_update: :cascade, on_delete: :restrict
