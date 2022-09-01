@@ -34,6 +34,9 @@ gem "devise"
 # Gem Kaminari
 gem 'kaminari'
 
+# Gem Simple Command
+gem 'simple_command'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
