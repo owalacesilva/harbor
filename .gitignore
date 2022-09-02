@@ -14,8 +14,10 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
+/trash/*
 !/log/.keep
 !/tmp/.keep
+!/trash/.keep
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
