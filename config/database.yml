@@ -38,7 +38,8 @@ test:
 
 staging:
   timeout: 5000
-  url: <%= ENV['DATABASE_URL'] %>
+  #url: <%= ENV['DATABASE_URL'] %>
+  database: harbor_staging
 
 production:
   timeout: 5000

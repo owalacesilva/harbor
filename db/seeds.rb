@@ -7,6 +7,7 @@ ref_token = Reference.create!(unique_name: :token, display_name: "TOKEN", unit_p
 unless Rails.env.production? || Rails.env.test?
   root_attrs = FactoryBot.attributes_for(:user, email: 'user@email.com', password: '123456')
   root = User.new(root_attrs)
+  root.build_node(lft: 1, rgt: 2, depth: 0, points: 0)
   root.save!
 
   profile_attrs = FactoryBot.attributes_for(:profile)
