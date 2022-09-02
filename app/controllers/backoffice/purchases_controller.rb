@@ -4,7 +4,8 @@ class Backoffice::PurchasesController < ApplicationController
   def index
     @filters = define_filters('purchases')
     query = PurchasesQuery.call(relation: current_user, filters: @filters)
-    @purchases = query.page(params[:page])
+    @purchases = query.order(created_at: :desc)
+      .page(params[:page])
       .per(params[:limit])
       .decorate
   end
