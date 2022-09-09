@@ -15,6 +15,9 @@ up:
 up-staging:
 	RAILS_ENV=staging bash ./server.sh
 
+up-test:
+	RAILS_ENV=test bash ./server.sh
+
 guard:
 	bundle exec guard
 
